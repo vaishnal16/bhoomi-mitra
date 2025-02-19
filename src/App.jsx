@@ -12,6 +12,7 @@ import CropCalendar from "./pages/CropCalendar.jsx";
 import AISupport from "./pages/AISupport.jsx";
 import Landing from "./pages/Landing.jsx";
 import AuthPages from "./pages/AuthPages.jsx";
+import Voicechatbot from "./pages/Voicechatbot.jsx";
 
 export default function App() {
   return (
@@ -51,6 +52,7 @@ function ProtectedLayout() {
             <Route path="/subsidy-checker" element={<SubsidyChecker />} />
             <Route path="/crop-calendar" element={<CropCalendar />} />
             <Route path="/ai-support" element={<AISupport />} />
+            <Route path="/voice-support" element={<Voicechatbot/>} />
           </Routes>
         </main>
       </div>

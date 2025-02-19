@@ -25,6 +25,7 @@ function Sidebar() {
     { path: '/crop-calendar', icon: BsCalendar, label: 'Crop Calendar' },
     { path: '/subsidy-checker', icon: BsCash, label: 'Subsidy Checker' },
     { path: '/ai-support', icon: BsChatDots, label: 'AI Support' },
+    { path: '/voice-support', icon: BsChatDots, label: 'Voice Support' },
   ];
 
   return (
