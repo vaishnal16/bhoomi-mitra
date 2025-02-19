@@ -12,6 +12,7 @@ import {
   BsCalendar
 } from 'react-icons/bs';
 import { GiSprout } from "react-icons/gi";
+import { MdOutlineRecordVoiceOver } from "react-icons/md";
 
 
 function Sidebar() {
@@ -25,7 +26,7 @@ function Sidebar() {
     { path: '/crop-calendar', icon: BsCalendar, label: 'Crop Calendar' },
     { path: '/subsidy-checker', icon: BsCash, label: 'Subsidy Checker' },
     { path: '/ai-support', icon: BsChatDots, label: 'AI Support' },
-    { path: '/voice-support', icon: BsChatDots, label: 'Voice Support' },
+    { path: '/voice-support', icon: MdOutlineRecordVoiceOver, label: 'Voice Support' },
   ];
 
   return (

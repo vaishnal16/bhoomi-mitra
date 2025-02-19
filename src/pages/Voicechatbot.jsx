@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Tractor } from 'lucide-react';
+import { MdOutlineRecordVoiceOver } from "react-icons/md";
 import VoiceRecorder from '../components/VoiceRecorder';
 import ChatMessage from '../components/ChatMessage';
 import LanguageSelector from '../components/LanguageSelector';
@@ -84,7 +84,7 @@ function Voicechatbot() {
       <header className="bg-green-600 text-white p-4 shadow-md">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Tractor className="w-8 h-8" />
+            <MdOutlineRecordVoiceOver className="w-8 h-8" />
             <h1 className="text-2xl font-bold">Kisan Saathi / किसान साथी</h1>
           </div>
           <LanguageSelector
@@ -98,7 +98,7 @@ function Voicechatbot() {
         <div className="bg-gray-50 rounded-lg shadow-lg min-h-[70vh] p-4 mb-4">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-[60vh] text-gray-500">
-              <Tractor className="w-16 h-16 mb-4 text-green-500" />
+              <MdOutlineRecordVoiceOver className="w-16 h-16 mb-4 text-green-500" />
               <p className="text-xl mb-2">Welcome! / आपका स्वागत है!</p>
               <p className="text-sm text-center">
                 Press the mic button below to ask your question
