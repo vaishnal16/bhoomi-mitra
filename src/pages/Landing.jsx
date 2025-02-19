@@ -1,9 +1,15 @@
 import { ArrowRight, Clock, ShieldCheck, BarChart, Phone, Mail, MapPin, Cloud, Sun, Leaf, Bot, LineChart, FileText } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate=useNavigate();
+
+  const handleGetStarted = () => {
+    navigate("/auth");
+  };
 
   useEffect(() => {
     setIsVisible(true);
@@ -107,6 +113,7 @@ const Index = () => {
               Empowering farmers with AI-driven insights and tools to maximize yields, minimize costs, and grow sustainably.
             </p>
             <button
+              onClick={handleGetStarted}
               className={`bg-green-600 hover:bg-green-700 text-white font-medium px-8 py-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg mx-auto ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
               } transition-all duration-1000 delay-500 ease-out`}
