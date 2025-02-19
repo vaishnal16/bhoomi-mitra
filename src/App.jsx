@@ -25,17 +25,9 @@ export default function App() {
         <Route
           path="/*"
           element={
-            <ProtectedLayout>
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/disease-detection" element={<DiseaseDetection />} />
-                <Route path="/market-analytics" element={<MarketAnalytics />} />
-                <Route path="/weather-insights" element={<WeatherInsights />} />
-                <Route path="/subsidy-checker" element={<SubsidyChecker />} />
-                <Route path="/crop-calendar" element={<CropCalendar />} />
-                <Route path="/ai-support" element={<AISupport />} />
-              </Routes>
-            </ProtectedLayout>
+            <PrivateRoute>
+              <ProtectedLayout />
+            </PrivateRoute>
           }
         />
       </Routes>
@@ -44,16 +36,24 @@ export default function App() {
 }
 
 /* Protected Layout - Includes Sidebar & Navbar */
-function ProtectedLayout({ children }) {
+function ProtectedLayout() {
   return (
-    <PrivateRoute>
-      <div className="flex">
-        <Sidebar />
-        <div className="md:ml-64 flex flex-col h-screen w-full bg-gray-100">
-          <Navbar />
-          <main className="flex-1 overflow-x-hidden overflow-y-auto p-6">{children}</main>
-        </div>
+    <div className="flex">
+      <Sidebar />
+      <div className="md:ml-64 flex flex-col h-screen w-full bg-gray-100">
+        <Navbar />
+        <main className="flex-1 overflow-x-hidden overflow-y-auto p-6">
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/disease-detection" element={<DiseaseDetection />} />
+            <Route path="/market-analytics" element={<MarketAnalytics />} />
+            <Route path="/weather-insights" element={<WeatherInsights />} />
+            <Route path="/subsidy-checker" element={<SubsidyChecker />} />
+            <Route path="/crop-calendar" element={<CropCalendar />} />
+            <Route path="/ai-support" element={<AISupport />} />
+          </Routes>
+        </main>
       </div>
-    </PrivateRoute>
+    </div>
   );
 }

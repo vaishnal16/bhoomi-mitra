@@ -18,7 +18,7 @@ function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { path: '/', icon: BsGrid1X2Fill, label: 'Dashboard' },
+    { path: '/dashboard', icon: BsGrid1X2Fill, label: 'Dashboard' },
     { path: '/disease-detection', icon: BsBug, label: 'Disease Detection' },
     { path: '/market-analytics', icon: BsGraphUp, label: 'Market Analytics' },
     { path: '/weather-insights', icon: BsCloud, label: 'Weather Insights' },
