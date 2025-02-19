@@ -12,6 +12,8 @@ import {
   Filler
 } from 'chart.js';
 import { BsArrowUp, BsArrowDown, BsNewspaper, BsBell, BsGraphUp, BsCashStack, BsGlobe } from 'react-icons/bs';
+import { fetchAgricultureNews } from '../services/googleNews';
+import ErrorBoundary from "../components/ErrorBoundary";
 
 ChartJS.register(
   CategoryScale,
@@ -29,9 +31,13 @@ function MarketAnalytics() {
   const [timeRange, setTimeRange] = useState('1M');
   const [region, setRegion] = useState('national');
   const [newsUpdates, setNewsUpdates] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const API_KEY = import.meta.env.VITE_GOOGLE_NEWS_API_KEY;
+  const CX_ID = import.meta.env.VITE_GOOGLE_CX_ID;
+  const query = "agriculture farming crops India";
 
-
-  const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
+  
   const [marketData, setMarketData] = useState({
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     datasets: [
@@ -69,21 +75,42 @@ function MarketAnalytics() {
 
   useEffect(() => {
     const fetchNews = async () => {
+      setLoading(true);
+      setError(null);
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/everything?q=agriculture OR farming OR crops&language=en&sortBy=publishedAt&apiKey=${API_KEY}`
+          `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&cx=${CX_ID}&key=${API_KEY}&sort=date&num=10`
         );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch news");
+        }
+
         const data = await response.json();
-        if (data.status === 'ok') {
-          setNewsUpdates(data.articles.slice(0, 6)); // FIXED: Assign news articles to state
+
+        if (data.items) {
+          const formattedNews = data.items.map((item) => ({
+            title: item.title,
+            description: item.snippet,
+            source: item.displayLink,
+            link: item.link,
+            publishedAt: new Date().toLocaleDateString(), // Google API doesn't provide a date, using current date as a placeholder
+          }));
+
+          setNewsUpdates(formattedNews);
+        } else {
+          setNewsUpdates([]);
         }
       } catch (error) {
-        console.error('Error fetching news:', error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchNews();
   }, []);
+
 
 
   const [priceAlerts] = useState([
@@ -241,21 +268,37 @@ function MarketAnalytics() {
       </div>
 
       {/* Market News */}
+      <ErrorBoundary>
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Market News & Analysis</h3>
+      <h3 className="text-lg font-medium text-gray-900 mb-4">
+        Market News & Analysis
+      </h3>
+
+      {loading ? (
+        <p className="text-gray-600">Loading news...</p>
+      ) : error ? (
+        <p className="text-red-600">{error}</p>
+      ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {newsUpdates.length > 0 ? (
             newsUpdates.map((news, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-4">
+              <div
+                key={index}
+                className="border border-gray-200 rounded-lg p-4 hover:shadow-lg transition-shadow duration-300"
+              >
                 <div className="flex items-start">
                   <BsNewspaper className="h-5 w-5 text-gray-400 mt-1" />
                   <div className="ml-3">
-                    <h4 className="text-sm font-medium text-gray-900">{news.title}</h4>
+                    <h4 className="text-sm font-medium text-gray-900">
+                      <a href={news.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                        {news.title}
+                      </a>
+                    </h4>
                     <p className="mt-1 text-sm text-gray-600">{news.description}</p>
                     <div className="mt-2 flex items-center text-xs text-gray-500">
-                      <span>{news.source?.name || 'Unknown Source'}</span>
+                      <span>{news.source}</span>
                       <span className="mx-1">•</span>
-                      <span>{new Date(news.publishedAt).toLocaleDateString()}</span>
+                      <span>{news.publishedAt}</span>
                     </div>
                   </div>
                 </div>
@@ -265,7 +308,9 @@ function MarketAnalytics() {
             <p className="text-gray-600">No news available at the moment.</p>
           )}
         </div>
-      </div>
+      )}
+    </div>
+      </ErrorBoundary>
     </div>
   );
 }
