@@ -128,7 +128,7 @@ AgriTech | AI-Driven Solutions | Sustainable Farming
 
 ## 📽️ Demo Link
 
-[Watch Demo Here](https://drive.google.com/file/d/your-demo-link/view](https://drive.google.com/file/d/1E3rnD26sses5k7M3uSKHludozjYhh3o3/view?usp=sharing)
+[Watch Demo Here](https://drive.google.com/file/d/1E3rnD26sses5k7M3uSKHludozjYhh3o3/view?usp=sharing)
 
 ## 🤝 Contributing
 
