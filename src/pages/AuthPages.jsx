@@ -101,13 +101,13 @@ const AuthPages = () => {
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white shadow-xl rounded-lg overflow-hidden border border-gray-100">
+    <div className="min-h-screen bg-cover bg-center flex items-center justify-center p-4" style={{ backgroundImage: "url('/assets/images/auth background.jpg')" }}>
+      <div className="w-full max-w-md bg-white shadow-[0_4px_20px_rgba(0,0,0,0.5)] rounded-xl overflow-hidden border-none">
         <div className="bg-gradient-to-r from-green-600 to-emerald-600 py-4 px-6">
           <div className="flex items-center justify-between mb-1">
             <Link to="/" className="flex items-center gap-2 text-white hover:text-green-100 transition-colors">
               <Shield className="text-white" size={24} />
-              <h1 className="text-sm font-medium text-green-100">Bhoomi Mitra</h1>
+              <h1 className="text-sm font-medium text-green-100">Bhoomi Mitra</h1>  
             </Link>
           </div>
                   <div className="flex flex-col items-center text-center">

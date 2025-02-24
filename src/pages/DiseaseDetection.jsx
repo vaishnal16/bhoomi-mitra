@@ -236,7 +236,7 @@ Keep responses brief and clear, avoiding unnecessary formatting.`;
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 rounded-lg">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <header className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Plant Health Analysis</h1>
@@ -249,7 +249,7 @@ Keep responses brief and clear, avoiding unnecessary formatting.`;
             <div className="space-y-6">
               <h2 className="text-2xl font-semibold text-gray-900">Upload Image</h2>
               <div 
-                className="border-2 border-dashed border-gray-200 rounded-xl transition-all duration-300 hover:border-blue-400 hover:bg-blue-50/30"
+                className="border-2 border-dashed border-gray-200 rounded-xl transition-all duration-300 hover:border-green-400 hover:bg-blue-50/30"
                 onDragOver={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -284,7 +284,7 @@ Keep responses brief and clear, avoiding unnecessary formatting.`;
                     />
                   ) : (
                     <div className="text-center py-16">
-                      <div className="mx-auto w-16 h-16 mb-4 text-blue-500">
+                      <div className="mx-auto w-16 h-16 mb-4 text-green-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
@@ -336,7 +336,7 @@ Keep responses brief and clear, avoiding unnecessary formatting.`;
               <button
                 onClick={analyzeImage}
                 disabled={!selectedImage || loading}
-                className="w-full py-4 bg-blue-600 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors duration-200 text-lg font-medium shadow-lg shadow-blue-200"
+                className="w-full py-4 bg-green-600 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-green-700 transition-colors duration-200 text-lg font-medium shadow-lg shadow-blue-200"
               >
                 {loading ? (
                   <div className="flex items-center justify-center">

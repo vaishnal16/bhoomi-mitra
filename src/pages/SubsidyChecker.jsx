@@ -91,7 +91,7 @@ const SubsidyChecker = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div className="bg-gradient-to-r from-green-600 to-green-500 rounded-lg p-6 mb-8 shadow-xl">
         <h2 className="text-3xl font-extrabold text-white">Agricultural Services Directory</h2>
         <p className="mt-2 text-white opacity-80">Find and explore government schemes for agricultural development</p>

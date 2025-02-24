@@ -89,7 +89,6 @@ const Index = () => {
                 alt={`Background ${index + 1}`}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-white/70 to-transparent" />
             </div>
           ))}
         </div>
@@ -113,14 +112,14 @@ const Index = () => {
               Empowering farmers with AI-driven insights and tools to maximize yields, minimize costs, and grow sustainably.
             </p>
             <button
-              onClick={handleGetStarted}
-              className={`bg-green-600 hover:bg-green-700 text-white font-medium px-8 py-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg mx-auto ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-              } transition-all duration-1000 delay-500 ease-out`}
-            >
-              Get Started
-              <ArrowRight className="w-5 h-5" />
-            </button>
+            onClick={handleGetStarted}
+            className={`bg-green-600 hover:bg-green-700 text-white font-medium px-8 py-4 rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-black/50 hover:shadow-2xl hover:shadow-black/70 transition-all duration-300 transform hover:scale-105 mx-auto ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+            } delay-500 ease-out`}
+          >
+            Get Started
+            <ArrowRight className="w-5 h-5" />
+          </button> 
           </div>
         </div>
 
@@ -161,7 +160,10 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             {features.map((feature, index) => (
-              <div key={index} className="bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-start transform hover:-translate-y-1 transition-transform duration-300">
+              <div
+              key={index}
+              className="bg-white p-6 md:p-8 rounded-xl shadow-xl hover:shadow-2xl flex flex-col items-start transform transition duration-300 hover:-translate-y-1"
+            >            
                 <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
                   {feature.icon}
                 </div>
@@ -178,7 +180,7 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                How Our AgriTech Works
+                How Our Bhoomi Mitra Works
               </h2>
             <p className="text-gray-700 max-w-2xl mx-auto text-lg">
               Simple steps to revolutionize your farming experience
@@ -222,11 +224,15 @@ const Index = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            <div className="bg-white p-6 md:p-8 rounded-xl shadow-md">
+            <div className="bg-white p-6 md:p-8 rounded-xl shadow-xl">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 font-bold">JD</span>
-                </div>
+              <div className="w-12 h-12 rounded-full overflow-hidden">
+                <img 
+                  src="/assets/images/farmer1.jpeg" 
+                  alt="John Deere" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
                 <div className="ml-4">
                   <h4 className="font-semibold">John Deere</h4>
                   <p className="text-sm text-gray-600">Wheat Farmer, Kansas</p>
@@ -234,23 +240,31 @@ const Index = () => {
               </div>
               <p className="text-gray-700">"The AI disease detection saved my wheat crop. I identified rust early and took preventive measures that saved me thousands."</p>
             </div>
-            <div className="bg-white p-6 md:p-8 rounded-xl shadow-md">
+            <div className="bg-white p-6 md:p-8 rounded-xl shadow-xl">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 font-bold">SP</span>
-                </div>
+              <div className="w-12 h-12 rounded-full overflow-hidden">
+                <img 
+                  src="/assets/images/farmer2.jpeg" 
+                  alt="Suresh Peterson" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
                 <div className="ml-4">
-                  <h4 className="font-semibold">Sarah Peterson</h4>
+                  <h4 className="font-semibold">Suresh Peterson</h4>
                   <p className="text-sm text-gray-600">Organic Farmer, California</p>
                 </div>
               </div>
               <p className="text-gray-700">"The weather insights are incredibly accurate. I've been able to plan my activities with confidence, even during unpredictable seasons."</p>
             </div>
-            <div className="bg-white p-6 md:p-8 rounded-xl shadow-md">
+            <div className="bg-white p-6 md:p-8 rounded-xl shadow-xl">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 font-bold">RG</span>
-                </div>
+              <div className="w-12 h-12 rounded-full overflow-hidden">
+                <img 
+                  src="/assets/images/farmer3.jpeg" 
+                  alt="Robert Garcia" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
                 <div className="ml-4">
                   <h4 className="font-semibold">Robert Garcia</h4>
                   <p className="text-sm text-gray-600">Corn Grower, Iowa</p>
@@ -267,7 +281,7 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             <div className="mb-8 md:mb-0">
-              <h3 className="text-xl font-semibold text-white mb-6">AgriTech Solutions</h3>
+              <h3 className="text-xl font-semibold text-white mb-6">Bhoomi Mitra</h3>
               <p className="mb-4 text-gray-400">
                 Leading the way in smart agricultural technology since 2018
               </p>
@@ -307,12 +321,12 @@ const Index = () => {
 
             <div>
               <h3 className="text-xl font-semibold text-white mb-6">Contact</h3>
-              <ul className="space-y-4">
+              <ul className="space-y-4">  
                 <li className="flex items-center gap-3 group">
                   <div className="p-2 bg-gray-800 rounded-full group-hover:bg-green-600 transition-colors duration-300">
                     <MapPin className="w-5 h-5" />
                   </div>
-                  <span>456 Farm Road, Agritech Valley</span>
+                  <span>456 Farm Road, Bhoomi Mitra Valley</span>
                 </li>
                 <li className="flex items-center gap-3 group">
                   <div className="p-2 bg-gray-800 rounded-full group-hover:bg-green-600 transition-colors duration-300">
@@ -324,7 +338,7 @@ const Index = () => {
                   <div className="p-2 bg-gray-800 rounded-full group-hover:bg-green-600 transition-colors duration-300">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <span>contact@agritechsolutions.com</span>
+                  <span>contact@bhoomimitra.com</span>
                 </li>
               </ul>
             </div>
@@ -332,7 +346,7 @@ const Index = () => {
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center">
             <p className="text-gray-500">
-              © {new Date().getFullYear()} AgriTech Solutions. All rights reserved.
+              © {new Date().getFullYear()} Bhoomi Mitra. All rights reserved.
             </p>
             <div className="mt-4 flex justify-center space-x-4 text-sm">
               <a href="#" className="text-gray-500 hover:text-white transition">Privacy Policy</a>

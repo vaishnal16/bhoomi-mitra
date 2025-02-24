@@ -81,7 +81,7 @@ function Voicechatbot() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-green-600 text-white p-4 shadow-md">
+      <header className="bg-green-600 text-white p-4 shadow-md rounded-lg">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <MdOutlineRecordVoiceOver className="w-8 h-8" />

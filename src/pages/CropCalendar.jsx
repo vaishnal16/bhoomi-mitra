@@ -209,9 +209,9 @@ function CropCalendar() {
   };
 
   return (
-    <div className="font-sans bg-slate-50 min-h-screen">
+    <div className="font-sans bg-slate-50 min-h-screen rounded-lg">
       {/* Enhanced Header */}
-      <div className="bg-gradient-to-r from-green-600 to-green-500 py-6 px-6 shadow-md">
+      <div className="bg-gradient-to-r from-green-600 to-green-500 py-6 px-6 shadow-md rounded-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center">
             <div className="w-10 h-10 bg-white flex items-center justify-center rounded-full shadow-md">
