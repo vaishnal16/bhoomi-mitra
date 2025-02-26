@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// Import JSON data (Ensure cropData.json is in src/assets/)
+import cropJsonData from '../assets/cropData.json';
 
 function CropCalendar() {
   const [regionFilter, setRegionFilter] = useState('all');
@@ -6,172 +8,14 @@ function CropCalendar() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCrop, setSelectedCrop] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [cropData, setCropData] = useState([]); // Rename imported JSON variable
+
   const itemsPerPage = 8;
 
-  // Enhanced crop calendar data with crops for every region
-  const cropData = [
-    {
-      id: 1,
-      crop: 'Wheat',
-      region: 'North',
-      sowingPeriod: 'October - November',
-      harvestPeriod: 'April - May',
-      details: 'Winter wheat is planted in fall and harvested in early summer. Requires well-drained soil and moderate rainfall. Frost-resistant varieties are recommended for northern regions.'
-    },
-    {
-      id: 2,
-      crop: 'Rice',
-      region: 'East',
-      sowingPeriod: 'June - July',
-      harvestPeriod: 'November - December',
-      details: 'Prefers warm climate and high humidity. Plant in flooded fields. Regular weeding and pest management is crucial for good yields.'
-    },
-    {
-      id: 3,
-      crop: 'Corn',
-      region: 'Midwest',
-      sowingPeriod: 'March - April',
-      harvestPeriod: 'August - September',
-      details: 'Plant when soil temperature reaches 60°F. Requires regular watering and nitrogen-rich fertilizer for optimal growth.'
-    },
-    {
-      id: 4,
-      crop: 'Soybeans',
-      region: 'Central',
-      sowingPeriod: 'May - June',
-      harvestPeriod: 'September - October',
-      details: 'Plant after last frost when soil warms. Rotate with corn for best results. Tolerates variety of soil conditions but prefers well-drained loamy soil.'
-    },
-    {
-      id: 5,
-      crop: 'Cotton',
-      region: 'South',
-      sowingPeriod: 'April - May',
-      harvestPeriod: 'August - October',
-      details: 'Requires hot climate and long frost-free period. Plant when soil temperature is at least 65°F. Regular pest management is essential.'
-    },
-    {
-      id: 6,
-      crop: 'Potatoes',
-      region: 'Northeast',
-      sowingPeriod: 'March - April',
-      harvestPeriod: 'July - August',
-      details: 'Plant 2-3 weeks before last expected frost. Grow best in loose, well-drained soil. Regular hilling helps increase yield and prevent greening.'
-    },
-    {
-      id: 7,
-      crop: 'Tomatoes',
-      region: 'West',
-      sowingPeriod: 'February - March',
-      harvestPeriod: 'June - August',
-      details: 'Start indoors 6-8 weeks before last frost. Transplant when soil warms and danger of frost has passed. Requires staking or caging for support.'
-    },
-    {
-      id: 8,
-      crop: 'Lettuce',
-      region: 'Various',
-      sowingPeriod: 'Year-round',
-      harvestPeriod: '30-45 days after planting',
-      details: 'Cool-season crop that grows best in temperatures between 60-70°F. Can be succession planted for continuous harvest. Requires consistent moisture.'
-    },
-    {
-      id: 9,
-      crop: 'Carrots',
-      region: 'North',
-      sowingPeriod: 'April - June',
-      harvestPeriod: 'July - October',
-      details: 'Sow directly in loose, sandy soil. Thin seedlings to ensure proper root development. Keep soil consistently moist until germination.'
-    },
-    {
-      id: 10,
-      crop: 'Cabbage',
-      region: 'Midwest',
-      sowingPeriod: 'Early spring/late summer',
-      harvestPeriod: 'Early summer/fall',
-      details: 'Cool-season crop. Plant spring crop 4 weeks before last frost. Plant fall crop in mid-summer. Needs consistent moisture and fertile soil.'
-    },
-    {
-      id: 11,
-      crop: 'Strawberries',
-      region: 'Northeast',
-      sowingPeriod: 'Early spring',
-      harvestPeriod: 'Late spring - summer',
-      details: 'Plant as soon as soil can be worked in spring. Place plants so crown is at soil level. Mulch around plants to conserve moisture and suppress weeds.'
-    },
-    {
-      id: 12,
-      crop: 'Watermelon',
-      region: 'South',
-      sowingPeriod: 'Late spring',
-      harvestPeriod: 'Mid to late summer',
-      details: 'Needs warm soil (at least 65°F). Plant seeds in hills or transplant seedlings after all danger of frost has passed. Provide ample growing space.'
-    },
-    // Added crops for each region
-    {
-      id: 13,
-      crop: 'Citrus',
-      region: 'West',
-      sowingPeriod: 'Early spring',
-      harvestPeriod: 'Fall - Winter',
-      details: 'Grows best in warm, sunny climates with moderate humidity. Needs protection from cold and frost. Water deeply but infrequently.'
-    },
-    {
-      id: 14,
-      crop: 'Blueberries',
-      region: 'East',
-      sowingPeriod: 'Early spring',
-      harvestPeriod: 'Mid-summer',
-      details: 'Requires acidic soil (pH 4.5-5.5). Plant in full sun. Mulch with pine needles or wood chips to maintain soil acidity and moisture.'
-    },
-    {
-      id: 15,
-      crop: 'Barley',
-      region: 'North',
-      sowingPeriod: 'September - October',
-      harvestPeriod: 'June - July',
-      details: 'Cold-tolerant grain crop. Can be planted as winter or spring crop. Prefers well-drained soil and moderate fertility.'
-    },
-    {
-      id: 16,
-      crop: 'Peanuts',
-      region: 'South',
-      sowingPeriod: 'April - May',
-      harvestPeriod: 'September - October',
-      details: 'Plant after soil temperature reaches 65°F. Grows best in light, sandy loam. Requires 120-140 frost-free days to mature.'
-    },
-    {
-      id: 17,
-      crop: 'Sugar Beets',
-      region: 'Midwest',
-      sowingPeriod: 'April - May',
-      harvestPeriod: 'September - October',
-      details: 'Plant when soil temperatures reach 50°F. Prefers deep, well-drained soil. Tolerates light frost but not freezing conditions.'
-    },
-    {
-      id: 18,
-      crop: 'Cranberries',
-      region: 'Northeast',
-      sowingPeriod: 'Spring',
-      harvestPeriod: 'September - November',
-      details: 'Grown in specially constructed bogs with acidic, peaty soil. Requires ample water supply. Plants are perennial and can produce for many years.'
-    },
-    {
-      id: 19,
-      crop: 'Sunflowers',
-      region: 'Central',
-      sowingPeriod: 'May - June',
-      harvestPeriod: 'August - September',
-      details: 'Direct seed after soil warms to 55°F. Grow best in well-drained, fertile soil with full sun exposure. Drought-tolerant once established.'
-    },
-    {
-      id: 20,
-      crop: 'Broccoli',
-      region: 'Various',
-      sowingPeriod: 'Early spring/late summer',
-      harvestPeriod: 'Early summer/fall',
-      details: 'Cool-season crop that grows best in temperatures between 65-75°F. Requires consistent moisture and fertile soil high in organic matter.'
-    }
-  ];
+  // Load crop data
+  useEffect(() => {
+    setCropData(cropJsonData.crops); // Use the imported JSON data
+  }, []);
 
   // Filter crops based on selected filters
   const filteredCrops = cropData.filter(crop => {
@@ -209,7 +53,8 @@ function CropCalendar() {
   };
 
   return (
-    <div className="font-sans bg-slate-50 min-h-screen rounded-lg">
+    <div className="max-w-6xl w-full mx-auto font-sans bg-slate-50 min-h-screen rounded-lg p-6 shadow-lg">
+
       {/* Enhanced Header */}
       <div className="bg-gradient-to-r from-green-600 to-green-500 py-6 px-6 shadow-md rounded-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -314,7 +159,7 @@ function CropCalendar() {
                     HARVEST PERIOD
                   </th>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    ACTIONS
+                    DETAILS
                   </th>
                 </tr>
               </thead>

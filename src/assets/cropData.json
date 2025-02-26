@@ -1,0 +1,804 @@
+{ 
+  "crops":[
+  {
+    "id": 1,
+    "crop": "Rice (Paddy)",
+    "region": "East & South India",
+    "sowingPeriod": "June - July (Kharif), January - February (Rabi)",
+    "harvestPeriod": "November - December (Kharif), May - June (Rabi)",
+    "details": "Major crop in states like West Bengal, Odisha, Tamil Nadu, and Kerala. Requires flooded fields and high humidity. Varieties include Basmati (North India) and short-grain (South India)."
+  },
+  {
+    "id": 2,
+    "crop": "Wheat",
+    "region": "North & Central India",
+    "sowingPeriod": "October - December",
+    "harvestPeriod": "March - April",
+    "details": "Second most important food grain. Major cultivation in Punjab, Haryana, Uttar Pradesh, and Madhya Pradesh. Requires cool winters and moderate rainfall. Sown in Rabi season."
+  },
+  {
+    "id": 3,
+    "crop": "Maize (Corn)",
+    "region": "North & South India",
+    "sowingPeriod": "June - July (Kharif), October - November (Rabi)",
+    "harvestPeriod": "September - October (Kharif), February - March (Rabi)",
+    "details": "Grown in Karnataka, Andhra Pradesh, Telangana, Rajasthan, and Maharashtra. Requires warm weather and well-drained soil. Used for both human consumption and animal feed."
+  },
+  {
+    "id": 4,
+    "crop": "Pulses (Lentils)",
+    "region": "Central & West India",
+    "sowingPeriod": "June - July (Kharif), October - November (Rabi)",
+    "harvestPeriod": "October - November (Kharif), February - March (Rabi)",
+    "details": "Varieties include tur (arhar), urad, moong, masoor, and chana. Madhya Pradesh, Maharashtra, Rajasthan, and Uttar Pradesh are major producers. Legumes that fix nitrogen in soil."
+  },
+  {
+    "id": 5,
+    "crop": "Cotton",
+    "region": "West & Central India",
+    "sowingPeriod": "May - June",
+    "harvestPeriod": "November - February",
+    "details": "Major cash crop grown in Gujarat, Maharashtra, Telangana, and Punjab. Requires warm climate, moderate rainfall, and black cotton soil (regur). Long growing season of 6-8 months."
+  },
+  {
+    "id": 6,
+    "crop": "Sugarcane",
+    "region": "North & South India",
+    "sowingPeriod": "February - March (Spring), October - November (Autumn)",
+    "harvestPeriod": "December - March (after 12-18 months)",
+    "details": "Major cultivation in Uttar Pradesh, Maharashtra, Karnataka, and Tamil Nadu. Requires tropical climate, high temperature, and heavy rainfall. Long duration crop that is harvested after 12-18 months."
+  },
+  {
+    "id": 7,
+    "crop": "Jute",
+    "region": "East India",
+    "sowingPeriod": "March - May",
+    "harvestPeriod": "July - September",
+    "details": "Major fiber crop of eastern India, particularly West Bengal and Assam. Requires high humidity, warm temperature, and alluvial soil. Known as the golden fiber of India."
+  },
+  {
+    "id": 8,
+    "crop": "Tea",
+    "region": "Northeast & South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "March - November (plucking seasons)",
+    "details": "Grown in Assam, West Bengal (Darjeeling), Tamil Nadu (Nilgiris), and Kerala. Requires cool climate, high rainfall, and acidic soil. Plantation crop with regular plucking of leaves."
+  },
+  {
+    "id": 9,
+    "crop": "Coffee",
+    "region": "South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "November - January",
+    "details": "Mainly grown in Karnataka, Kerala, and Tamil Nadu. Arabica and Robusta are major varieties. Requires hilly terrain, warm temperature, well-distributed rainfall, and shade."
+  },
+  {
+    "id": 10,
+    "crop": "Groundnut (Peanut)",
+    "region": "South & West India",
+    "sowingPeriod": "June - July (Kharif), November - December (Rabi)",
+    "harvestPeriod": "October - November (Kharif), March - April (Rabi)",
+    "details": "Major oilseed crop grown in Gujarat, Andhra Pradesh, Tamil Nadu, and Karnataka. Requires light sandy loam soil, moderate rainfall, and warm climate."
+  },
+  {
+    "id": 11,
+    "crop": "Mustard",
+    "region": "North & East India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "February - March",
+    "details": "Important oilseed of Rabi season grown in Rajasthan, Uttar Pradesh, Haryana, West Bengal, and Assam. Requires cool climate and moderate rainfall."
+  },
+  {
+    "id": 12,
+    "crop": "Potato",
+    "region": "North & East India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "January - February",
+    "details": "Major vegetable crop of Rabi season grown in Uttar Pradesh, West Bengal, Bihar, and Punjab. Requires cool climate, well-drained soil, and moderate rainfall."
+  },
+  {
+    "id": 13,
+    "crop": "Mango",
+    "region": "North & South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "April - July",
+    "details": "National fruit of India with major cultivation in Uttar Pradesh, Andhra Pradesh, Telangana, Karnataka, and Maharashtra. Varieties include Alphonso, Dasheri, Langra, and Banganapalli."
+  },
+  {
+    "id": 14,
+    "crop": "Coconut",
+    "region": "South & West Coast",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "Year-round",
+    "details": "Major plantation crop of Kerala, Tamil Nadu, Karnataka, and Andhra Pradesh. Requires tropical climate, sandy soil, and coastal areas. Known as \"Kalpavriksha\" (tree of heaven)."
+  },
+  {
+    "id": 15,
+    "crop": "Soybean",
+    "region": "Central India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "September - October",
+    "details": "Major oilseed of Kharif season grown predominantly in Madhya Pradesh, Maharashtra, and Rajasthan. Requires well-drained soil and moderate rainfall."
+  },
+  {
+    "id": 16,
+    "crop": "Onion",
+    "region": "West & South India",
+    "sowingPeriod": "October - November (Rabi), June - July (Kharif)",
+    "harvestPeriod": "January - March (Rabi), October - November (Kharif)",
+    "details": "Major vegetable crop grown in Maharashtra, Karnataka, Gujarat, and Madhya Pradesh. Maharashtra's Nashik district is known as the onion bowl of India."
+  },
+  {
+    "id": 17,
+    "crop": "Chilli",
+    "region": "South & Central India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "November - January",
+    "details": "Major spice crop grown in Andhra Pradesh, Telangana, Karnataka, and Madhya Pradesh. India is the largest producer and exporter of chilli in the world."
+  },
+  {
+    "id": 18,
+    "crop": "Turmeric",
+    "region": "South India",
+    "sowingPeriod": "June - August",
+    "harvestPeriod": "January - March",
+    "details": "Important spice crop grown in Telangana, Andhra Pradesh, Tamil Nadu, and Maharashtra. Requires warm and humid climate with annual rainfall of 1500-2000 mm."
+  },
+  {
+    "id": 19,
+    "crop": "Millets (Bajra, Jowar, Ragi)",
+    "region": "West & South India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "September - October",
+    "details": "Drought-resistant crops grown in Rajasthan, Maharashtra, Karnataka, and Tamil Nadu. Require less water and can grow in arid and semi-arid regions. Nutritionally rich alternatives to rice and wheat."
+  },
+  {
+    "id": 20,
+    "crop": "Banana",
+    "region": "South & East India",
+    "sowingPeriod": "June - October",
+    "harvestPeriod": "10-12 months after planting",
+    "details": "Major fruit crop grown in Tamil Nadu, Maharashtra, Gujarat, and Andhra Pradesh. Requires tropical climate, deep loamy soil, and good drainage. Various varieties including Cavendish, Poovan, and Nendran."
+  },
+  {
+    "id": 21,
+    "crop": "Cashew",
+    "region": "West & South Coast",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "February - May",
+    "details": "Grown in Kerala, Maharashtra, Goa, and Andhra Pradesh. Requires tropical climate and coastal areas. India is a major exporter of cashew kernels."
+  },
+  {
+    "id": 22,
+    "crop": "Ginger",
+    "region": "Northeast & South India",
+    "sowingPeriod": "April - May",
+    "harvestPeriod": "December - January",
+    "details": "Major spice crop grown in Kerala, Meghalaya, Arunachal Pradesh, and Mizoram. Requires warm and humid climate with annual rainfall of 1500-3000 mm."
+  },
+  {
+    "id": 23,
+    "crop": "Cardamom",
+    "region": "South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "August - December",
+    "details": "Known as the \"Queen of Spices,\" grown primarily in Kerala, Karnataka, and Tamil Nadu in the Western Ghats. Requires elevation of 600-1200m, shade, high humidity, and well-distributed rainfall."
+  },
+  {
+    "id": 24,
+    "crop": "Tomato",
+    "region": "All India",
+    "sowingPeriod": "October - November (Rabi), June - July (Kharif)",
+    "harvestPeriod": "February - March (Rabi), September - October (Kharif)",
+    "details": "Grown across India with major production in Maharashtra, Karnataka, Andhra Pradesh, and Madhya Pradesh. Requires well-drained soil, moderate temperature, and regular irrigation."
+  },
+  {
+    "id": 25,
+    "crop": "Rubber",
+    "region": "South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "Year-round tapping",
+    "details": "Major plantation crop of Kerala, Tamil Nadu, and Karnataka. Requires hot and humid climate with annual rainfall of 2000-4500 mm. Kerala accounts for more than 90% of India's rubber production."
+  },
+  {
+    "id": 26,
+    "crop": "Black Pepper",
+    "region": "South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "December - February",
+    "details": "Known as the \"King of Spices,\" grown mainly in Kerala, Karnataka, and Tamil Nadu. Requires warm humid climate, well-distributed rainfall, and shade from supporting trees."
+  },
+  {
+    "id": 27,
+    "crop": "Guava",
+    "region": "North & Central India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "August - September, January - February",
+    "details": "Major fruit crop grown in Uttar Pradesh, Bihar, Madhya Pradesh, and Maharashtra. Requires tropical and subtropical climate with moderate rainfall. Multiple harvests possible annually."
+  },
+  {
+    "id": 28,
+    "crop": "Papaya",
+    "region": "South & West India",
+    "sowingPeriod": "Perennial crop (2-3 year lifespan)",
+    "harvestPeriod": "Year-round (begins 9-12 months after planting)",
+    "details": "Grown in Andhra Pradesh, Karnataka, Gujarat, and Maharashtra. Requires tropical climate, rich well-drained soil, and protection from strong winds."
+  },
+  {
+    "id": 29,
+    "crop": "Sesame (Til)",
+    "region": "Central & West India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "October - November",
+    "details": "Important oilseed crop grown in Rajasthan, Madhya Pradesh, Gujarat, and Uttar Pradesh. Requires well-drained soil, warm climate, and moderate rainfall."
+  },
+  {
+    "id": 30,
+    "crop": "Safflower",
+    "region": "Central & South India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "March - April",
+    "details": "Oilseed crop grown in Maharashtra, Karnataka, and Andhra Pradesh. Requires dry climate, moderate temperature, and well-drained soil. Drought-resistant crop of the Rabi season."
+  },
+  {
+    "id": 31,
+    "crop": "Sunflower",
+    "region": "South & Central India",
+    "sowingPeriod": "June - July (Kharif), October - November (Rabi)",
+    "harvestPeriod": "September - October (Kharif), February - March (Rabi)",
+    "details": "Oilseed crop grown in Karnataka, Andhra Pradesh, Maharashtra, and Bihar. Requires well-drained soil, moderate temperature, and adequate sunlight."
+  },
+  {
+    "id": 32,
+    "crop": "Cabbage",
+    "region": "North & East India",
+    "sowingPeriod": "September - October",
+    "harvestPeriod": "December - February",
+    "details": "Cool-season vegetable grown in West Bengal, Odisha, Bihar, and Assam. Requires cool climate, well-drained soil, and regular irrigation. Major winter vegetable in eastern India."
+  },
+  {
+    "id": 33,
+    "crop": "Cauliflower",
+    "region": "North India",
+    "sowingPeriod": "September - October",
+    "harvestPeriod": "December - January",
+    "details": "Important winter vegetable grown in Uttar Pradesh, Bihar, Haryana, and Punjab. Requires cool climate, fertile soil, and adequate moisture."
+  },
+  {
+    "id": 34,
+    "crop": "Garlic",
+    "region": "North & Central India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "March - April",
+    "details": "Major spice crop grown in Madhya Pradesh, Gujarat, Rajasthan, and Uttar Pradesh. Requires cool climate, well-drained soil, and moderate rainfall."
+  },
+  {
+    "id": 35,
+    "crop": "Coriander",
+    "region": "North & Central India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "February - March",
+    "details": "Important herb and spice crop grown in Rajasthan, Gujarat, Madhya Pradesh, and Uttar Pradesh. Requires cool climate, well-drained soil, and moderate water availability."
+  },
+  {
+    "id": 36,
+    "crop": "Cumin (Jeera)",
+    "region": "West India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "February - March",
+    "details": "Major spice crop grown in Gujarat and Rajasthan. Requires cool dry climate, sandy soil, and limited rainfall. Gujarat's Banaskantha region is famous for cumin production."
+  },
+  {
+    "id": 37,
+    "crop": "Fenugreek (Methi)",
+    "region": "North & West India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "February - March",
+    "details": "Grown in Rajasthan, Gujarat, Uttar Pradesh, and Punjab. Used both as a vegetable (leaves) and as a spice (seeds). Requires cool climate and well-drained soil."
+  },
+  {
+    "id": 38,
+    "crop": "Grapes",
+    "region": "West & South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "February - May",
+    "details": "Grown in Maharashtra, Karnataka, Tamil Nadu, and Andhra Pradesh. Maharashtra's Nashik and Sangli districts are major grape-producing regions. Requires warm climate, well-drained soil, and controlled irrigation."
+  },
+  {
+    "id": 39,
+    "crop": "Pomegranate",
+    "region": "West & South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "February - March, August - September",
+    "details": "Grown in Maharashtra, Karnataka, Gujarat, and Andhra Pradesh. Maharashtra's Solapur district is famous for pomegranate cultivation. Requires hot dry climate and well-drained soil."
+  },
+  {
+    "id": 40,
+    "crop": "Litchi",
+    "region": "East & North India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "May - June",
+    "details": "Grown in Bihar, West Bengal, Uttarakhand, and Jharkhand. Bihar's Muzaffarpur district is famous for litchi cultivation. Requires warm subtropical climate with cool dry winters."
+  },
+  {
+    "id": 41,
+    "crop": "Pineapple",
+    "region": "Northeast & South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "June - December",
+    "details": "Grown in Northeast states, Kerala, Karnataka, and West Bengal. Requires tropical climate, high humidity, and well-distributed rainfall. Meghalaya and Kerala are major producers."
+  },
+  {
+    "id": 42,
+    "crop": "Brinjal (Eggplant)",
+    "region": "All India",
+    "sowingPeriod": "June - July (Kharif), October - November (Rabi)",
+    "harvestPeriod": "October - November (Kharif), February - March (Rabi)",
+    "details": "Year-round vegetable grown across India with major production in West Bengal, Odisha, Bihar, and Maharashtra. Requires warm climate, fertile soil, and regular irrigation."
+  },
+  {
+    "id": 43,
+    "crop": "Okra (Lady's Finger)",
+    "region": "All India",
+    "sowingPeriod": "February - March (Summer), June - July (Rainy)",
+    "harvestPeriod": "April - June (Summer), August - October (Rainy)",
+    "details": "Popular vegetable grown across India with major production in Uttar Pradesh, Bihar, Odisha, and West Bengal. Requires warm climate, well-drained soil, and moderate rainfall."
+  },
+  {
+    "id": 44,
+    "crop": "Clove",
+    "region": "South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "October - December",
+    "details": "Spice crop grown in Kerala, Tamil Nadu, and Karnataka. Requires hot humid climate, high rainfall, and elevation of 300-600m. The unopened flower buds are harvested and dried."
+  },
+  {
+    "id": 45,
+    "crop": "Nutmeg",
+    "region": "South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "August - December",
+    "details": "Spice crop grown in Kerala and Tamil Nadu. Requires tropical climate, high humidity, and well-distributed rainfall. Two spices (nutmeg and mace) are obtained from a single fruit."
+  },
+  {
+    "id": 46,
+    "crop": "Arecanut (Betel Nut)",
+    "region": "South & Northeast India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "November - January",
+    "details": "Grown in Karnataka, Kerala, Assam, and Meghalaya. Requires tropical climate, high rainfall, and well-drained soil. Karnataka's Dakshina Kannada district is a major producer."
+  },
+  {
+    "id": 47,
+    "crop": "Watermelon",
+    "region": "North & South India",
+    "sowingPeriod": "December - January",
+    "harvestPeriod": "March - May",
+    "details": "Grown in Uttar Pradesh, Andhra Pradesh, Karnataka, and Tamil Nadu. Requires hot climate, sandy loam soil, and adequate irrigation. Summer season fruit with high water content."
+  },
+  {
+    "id": 48,
+    "crop": "Carrot",
+    "region": "North & West India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "January - February",
+    "details": "Winter vegetable grown in Uttar Pradesh, Punjab, Haryana, and Karnataka. Requires cool climate, deep loose soil, and adequate moisture. Major root vegetable of the Rabi season."
+  },
+  {
+    "id": 49,
+    "crop": "Jackfruit",
+    "region": "South & East India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "March - June",
+    "details": "Grown in Kerala, Tamil Nadu, Karnataka, and West Bengal. Requires tropical climate, well-distributed rainfall, and deep well-drained soil. National fruit of Bangladesh and Sri Lanka."
+  },
+  {
+    "id": 50,
+    "crop": "Sapota (Chikoo)",
+    "region": "South & West India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "Year-round (peak: December - March)",
+    "details": "Grown in Maharashtra, Gujarat, Karnataka, and Tamil Nadu. Requires tropical or subtropical climate, deep well-drained soil, and protection from strong winds. Gujarat and Maharashtra are major producers."
+  },
+  {
+    "id": 51,
+    "crop": "Apple",
+    "region": "North India (Himalayan Region)",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "August - November",
+    "details": "Mainly grown in Jammu & Kashmir, Himachal Pradesh, and Uttarakhand. Requires cold climate, well-drained soil, and altitude of 1500-2700m. Himachal Pradesh's Shimla district is famous for apple cultivation."
+  },
+  {
+    "id": 52,
+    "crop": "Barley",
+    "region": "North & Central India",
+    "sowingPeriod": "October - December",
+    "harvestPeriod": "March - April",
+    "details": "Grown in Rajasthan, Uttar Pradesh, Punjab, and Haryana. Requires cool climate, moderate rainfall, and well-drained soil. More drought-resistant than wheat and grown as a Rabi crop."
+  },
+  {
+    "id": 53,
+    "crop": "Guar (Cluster Bean)",
+    "region": "Northwest India",
+    "sowingPeriod": "July - August",
+    "harvestPeriod": "October - November",
+    "details": "Major cultivation in Rajasthan, Haryana, Gujarat, and Punjab. Rajasthan produces over 80% of India's guar. Drought-resistant crop used for guar gum production which has industrial applications."
+  },
+  {
+    "id": 54,
+    "crop": "Rose",
+    "region": "North & South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "Year-round (peak: December - February)",
+    "details": "Commercial flower crop grown in Tamil Nadu, Karnataka, Maharashtra, and Uttar Pradesh. Tamil Nadu's Hosur region and Karnataka's Bangalore region are major producers for both domestic market and export."
+  },
+  {
+    "id": 55,
+    "crop": "Lychee",
+    "region": "East & North India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "May - June",
+    "details": "Major production in Bihar, West Bengal, Jharkhand, and Uttarakhand. Bihar's Muzaffarpur district is the largest producer. Requires subtropical climate with cool, dry winters and warm, humid summers."
+  },
+  {
+    "id": 56,
+    "crop": "Bitter Gourd (Karela)",
+    "region": "All India",
+    "sowingPeriod": "February - March (Summer), July - August (Rainy)",
+    "harvestPeriod": "April - June (Summer), September - October (Rainy)",
+    "details": "Grown across India with major production in Uttar Pradesh, Maharashtra, Tamil Nadu, and Karnataka. Requires warm climate, well-drained soil, and regular irrigation. Valued for medicinal properties."
+  },
+  {
+    "id": 57,
+    "crop": "Bottle Gourd (Lauki)",
+    "region": "All India",
+    "sowingPeriod": "January - February (Spring), June - July (Rainy)",
+    "harvestPeriod": "March - May (Spring), August - October (Rainy)",
+    "details": "Popular vegetable grown across India with major production in Uttar Pradesh, Bihar, Punjab, and Haryana. Requires warm climate, well-drained fertile soil, and adequate moisture."
+  },
+  {
+    "id": 58,
+    "crop": "Tamarind",
+    "region": "South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "March - April",
+    "details": "Grown in Andhra Pradesh, Telangana, Tamil Nadu, and Karnataka. Requires tropical climate, dry weather during flowering, and well-drained soil. Trees start bearing fruit after 7-8 years of planting."
+  },
+  {
+    "id": 59,
+    "crop": "Ragi (Finger Millet)",
+    "region": "South India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "September - October",
+    "details": "Drought-resistant crop grown in Karnataka, Tamil Nadu, Andhra Pradesh, and Odisha. Karnataka is the largest producer. Nutritionally rich grain used in traditional foods and gaining popularity as health food."
+  },
+  {
+    "id": 60,
+    "crop": "Kodo Millet",
+    "region": "Central & South India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "September - October",
+    "details": "Grown in Madhya Pradesh, Chhattisgarh, Karnataka, and Tamil Nadu. Drought-resistant crop that can grow in poor soil conditions. Part of India's revival of traditional millets for nutritional security."
+  },
+  {
+    "id": 61,
+    "crop": "Foxtail Millet",
+    "region": "South & Central India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "September - October",
+    "details": "Grown in Andhra Pradesh, Karnataka, Tamil Nadu, and Rajasthan. Drought-tolerant crop with short growing season of 80-90 days. Contains high amount of protein and minerals."
+  },
+  {
+    "id": 62,
+    "crop": "Flax (Linseed)",
+    "region": "Central & North India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "February - March",
+    "details": "Grown in Madhya Pradesh, Uttar Pradesh, Maharashtra, and Bihar. Requires cool climate, moderate rainfall, and well-drained soil. Cultivated for both fiber (flax) and oilseeds (linseed)."
+  },
+  {
+    "id": 63,
+    "crop": "Isabgol (Psyllium)",
+    "region": "Northwest India",
+    "sowingPeriod": "November - December",
+    "harvestPeriod": "March - April",
+    "details": "Medicinal crop grown primarily in Gujarat and Rajasthan. Gujarat's Banaskantha and Mehsana districts are major producers. Requires cool dry climate and light sandy loam soil. India is the largest producer globally."
+  },
+  {
+    "id": 64,
+    "crop": "Drumstick (Moringa)",
+    "region": "South & West India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "December - April",
+    "details": "Grown in Tamil Nadu, Andhra Pradesh, Karnataka, and Maharashtra. Requires tropical or subtropical climate, well-drained soil, and moderate rainfall. Valued for nutritional and medicinal properties."
+  },
+  {
+    "id": 65,
+    "crop": "Bay Leaf (Tej Patta)",
+    "region": "Northeast & North India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "October - February",
+    "details": "Spice crop grown in Uttarakhand, Sikkim, Meghalaya, and Assam. Requires subtropical to temperate climate, high humidity, and well-distributed rainfall. Used extensively in Indian cooking."
+  },
+  {
+    "id": 66,
+    "crop": "Large Cardamom",
+    "region": "Northeast India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "August - November",
+    "details": "Different from small cardamom, grown primarily in Sikkim, Darjeeling, and Arunachal Pradesh. Requires elevation of 800-2000m, high humidity, and well-distributed rainfall. Sikkim is the largest producer globally."
+  },
+  {
+    "id": 67,
+    "crop": "Vanilla",
+    "region": "South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "January - March",
+    "details": "Grown in Kerala, Karnataka, and Tamil Nadu. Requires tropical climate, high humidity, and partial shade. Labor-intensive crop requiring hand pollination of flowers. Kerala leads in production."
+  },
+  {
+    "id": 68,
+    "crop": "Lotus Seeds (Makhana)",
+    "region": "East India",
+    "sowingPeriod": "February - March",
+    "harvestPeriod": "August - October",
+    "details": "Aquatic crop grown primarily in Bihar, Assam, West Bengal, and Manipur. Bihar's Darbhanga and Madhubani districts are famous for makhana cultivation. Requires stagnant water bodies with 4-6 feet depth."
+  },
+  {
+    "id": 69,
+    "crop": "Water Chestnut (Singhara)",
+    "region": "North & East India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "October - November",
+    "details": "Aquatic crop grown in Uttar Pradesh, Bihar, West Bengal, and Assam. Requires shallow water bodies with 5-6 feet depth. Nutritious food consumed during religious fasting periods."
+  },
+  {
+    "id": 70,
+    "crop": "Bamboo",
+    "region": "Northeast & East India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "Year-round (mature culms harvested after 3-5 years)",
+    "details": "Grown in Northeast states, West Bengal, Odisha, and Madhya Pradesh. Northeast India accounts for 66% of India's bamboo production. Used for construction, paper, handicrafts, and as vegetable (bamboo shoots)."
+  },
+  {
+    "id": 71,
+    "crop": "Fennel (Saunf)",
+    "region": "West & North India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "March - April",
+    "details": "Major spice crop grown in Gujarat, Rajasthan, Uttar Pradesh, and Punjab. Gujarat's Mehsana and Banaskantha districts are leading producers. Requires cool dry climate, well-drained soil, and moderate irrigation."
+  },
+  {
+    "id": 72,
+    "crop": "Star Anise",
+    "region": "Northeast India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "October - December",
+    "details": "Spice crop grown in Arunachal Pradesh, Sikkim, and Meghalaya. Requires subtropical climate, high rainfall, and elevation of 800-1500m. The star-shaped fruits are harvested and dried for use as spice."
+  },
+  {
+    "id": 73,
+    "crop": "Walnut",
+    "region": "North India (Himalayan Region)",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "August - September",
+    "details": "Grown in Jammu & Kashmir, Himachal Pradesh, and Uttarakhand. Requires temperate climate, cold winters, mild summers, and well-drained soil. Jammu & Kashmir is the largest producer in India."
+  },
+  {
+    "id": 74,
+    "crop": "Almond",
+    "region": "North India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "July - August",
+    "details": "Grown mainly in Jammu & Kashmir, Himachal Pradesh, and Uttarakhand. Requires cold winters for dormancy, warm springs, and well-drained soil. Cultivation is limited compared to imports."
+  },
+  {
+    "id": 75,
+    "crop": "Pistachio",
+    "region": "North India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "August - September",
+    "details": "Recent introduction to Indian agriculture, grown in parts of Jammu & Kashmir, Himachal Pradesh, and Punjab. Requires hot dry summers, cold winters, and well-drained soil. Commercial cultivation is still developing."
+  },
+  {
+    "id": 76,
+    "crop": "Amaranth (Rajgira)",
+    "region": "Central & North India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "September - October",
+    "details": "Ancient grain crop grown in Uttarakhand, Himachal Pradesh, Maharashtra, and Gujarat. Highly nutritious pseudocereal used in traditional foods and growing in popularity as a health food. Drought-resistant crop."
+  },
+  {
+    "id": 77,
+    "crop": "Buckwheat (Kuttu)",
+    "region": "North India (Himalayan Region)",
+    "sowingPeriod": "August - September (Kharif), March - April (Zaid)",
+    "harvestPeriod": "November - December (Kharif), June - July (Zaid)",
+    "details": "Grown in Jammu & Kashmir, Himachal Pradesh, Uttarakhand, and Arunachal Pradesh. Pseudocereal used in traditional foods, particularly during religious fasting. Requires cool climate and moderate rainfall."
+  },
+  {
+    "id": 78,
+    "crop": "Wood Apple (Bael)",
+    "region": "North & Central India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "March - May",
+    "details": "Grown in Uttar Pradesh, Bihar, West Bengal, and Madhya Pradesh. Drought-resistant tree that thrives in dry regions. Fruit has medicinal properties and is used in Ayurvedic medicine and religious ceremonies."
+  },
+  {
+    "id": 79,
+    "crop": "Custard Apple (Sitaphal)",
+    "region": "Central & South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "September - November",
+    "details": "Grown in Maharashtra, Andhra Pradesh, Karnataka, and Tamil Nadu. Requires tropical or subtropical climate, well-drained soil, and protection from frost. Maharashtra's Ahmednagar district is a major producer."
+  },
+  {
+    "id": 80,
+    "crop": "Amla (Indian Gooseberry)",
+    "region": "Central & North India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "November - February",
+    "details": "Grown in Uttar Pradesh, Madhya Pradesh, Gujarat, and Rajasthan. Uttar Pradesh's Pratapgarh district is famous for amla production. Highly valued in Ayurvedic medicine for its high vitamin C content."
+  },
+  {
+    "id": 81,
+    "crop": "Jamun (Java Plum)",
+    "region": "All India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "June - July",
+    "details": "Grown across India, with major production in Maharashtra, Uttar Pradesh, Tamil Nadu, and Gujarat. Drought-resistant tree that requires well-drained soil. Fruit has medicinal properties, particularly beneficial for diabetes."
+  },
+  {
+    "id": 82,
+    "crop": "Ber (Indian Jujube)",
+    "region": "West & North India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "February - March",
+    "details": "Grown in Rajasthan, Gujarat, Maharashtra, and Haryana. Highly drought-resistant fruit tree suitable for arid and semi-arid regions. Rajasthan is a major producer with varieties like Gola, Seb, and Umran."
+  },
+  {
+    "id": 83,
+    "crop": "Rajma (Kidney Bean)",
+    "region": "North India",
+    "sowingPeriod": "May - June",
+    "harvestPeriod": "September - October",
+    "details": "Grown in Jammu & Kashmir, Himachal Pradesh, Uttarakhand, and Maharashtra. Jammu & Kashmir's Bhaderwah region and Himachal's Kullu valley produce the famous red kidney beans. Requires cool climate and moderate rainfall."
+  },
+  {
+    "id": 84,
+    "crop": "Ash Gourd (Winter Melon)",
+    "region": "South & East India",
+    "sowingPeriod": "January - February, June - July",
+    "harvestPeriod": "April - May, September - October",
+    "details": "Grown in Kerala, Tamil Nadu, Andhra Pradesh, and West Bengal. Requires warm climate, well-drained soil, and regular irrigation. Used both as vegetable and in traditional Ayurvedic medicine."
+  },
+  {
+    "id": 85,
+    "crop": "Ridge Gourd (Turai)",
+    "region": "All India",
+    "sowingPeriod": "February - March (Summer), June - July (Rainy)",
+    "harvestPeriod": "April - June (Summer), August - October (Rainy)",
+    "details": "Grown across India with major production in Uttar Pradesh, Bihar, Odisha, and Maharashtra. Requires warm climate, rich soil, and regular irrigation. Popular summer vegetable that grows on vines."
+  },
+  {
+    "id": 86,
+    "crop": "Snake Gourd (Chichinda)",
+    "region": "South & East India",
+    "sowingPeriod": "February - March (Summer), June - July (Rainy)",
+    "harvestPeriod": "April - June (Summer), August - October (Rainy)",
+    "details": "Grown in Kerala, Tamil Nadu, Odisha, and West Bengal. Requires warm humid climate, fertile soil, and regular irrigation. Long serpentine vegetable popular in South Indian cuisine."
+  },
+  {
+    "id": 87,
+    "crop": "Pointed Gourd (Parwal)",
+    "region": "East India",
+    "sowingPeriod": "January - February",
+    "harvestPeriod": "April - September",
+    "details": "Grown in West Bengal, Bihar, Odisha, and Assam. West Bengal and Bihar are the largest producers. Requires warm humid climate, good rainfall, and fertile soil. Perennial vine vegetable popular in eastern Indian cuisine."
+  },
+  {
+    "id": 88,
+    "crop": "Elephant Foot Yam (Suran)",
+    "region": "South & East India",
+    "sowingPeriod": "April - May",
+    "harvestPeriod": "December - January",
+    "details": "Grown in Andhra Pradesh, Kerala, Tamil Nadu, and West Bengal. Requires tropical climate, deep well-drained soil, and adequate moisture. Used as vegetable and in Ayurvedic medicine."
+  },
+  {
+    "id": 89,
+    "crop": "Sweet Potato",
+    "region": "South & East India",
+    "sowingPeriod": "June - July, December - January",
+    "harvestPeriod": "October - November, April - May",
+    "details": "Grown in Odisha, Uttar Pradesh, West Bengal, and Karnataka. Odisha is the largest producer. Requires warm climate, sandy loam soil, and moderate rainfall. Nutritious root vegetable rich in vitamin A."
+  },
+  {
+    "id": 90,
+    "crop": "Tapioca (Cassava)",
+    "region": "South India",
+    "sowingPeriod": "April - May (Rainfed), December - January (Irrigated)",
+    "harvestPeriod": "December - January (Rainfed), August - September (Irrigated)",
+    "details": "Grown primarily in Tamil Nadu, Kerala, and Andhra Pradesh. Tamil Nadu's Salem district is a major producer. Requires tropical climate, well-distributed rainfall, and loose soil. Important starch crop in South India."
+  },
+  {
+    "id": 91,
+    "crop": "Ajwain (Carom Seeds)",
+    "region": "West & Central India",
+    "sowingPeriod": "October - November",
+    "harvestPeriod": "March - April",
+    "details": "Spice crop grown in Rajasthan, Gujarat, Madhya Pradesh, and Uttar Pradesh. Requires dry climate, moderate temperature, and well-drained soil. Used in Indian cooking and traditional medicine for digestive ailments."
+  },
+  {
+    "id": 92,
+    "crop": "Kachari (Cucumber Family)",
+    "region": "Northeast India",
+    "sowingPeriod": "February - March",
+    "harvestPeriod": "May - July",
+    "details": "Indigenous vegetable grown in Assam, Meghalaya, Nagaland, and Manipur. Requires warm humid climate and well-drained soil. Important part of traditional Northeast Indian cuisine."
+  },
+  {
+    "id": 93,
+    "crop": "Safed Musli",
+    "region": "Central India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "January - February",
+    "details": "Medicinal herb grown in Madhya Pradesh, Chhattisgarh, Gujarat, and Maharashtra. Requires tropical or subtropical climate and well-drained soil. Highly valued in Ayurvedic medicine for its therapeutic properties."
+  },
+  {
+    "id": 94,
+    "crop": "Shatavari",
+    "region": "North & Central India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "February - March",
+    "details": "Medicinal herb grown in Himachal Pradesh, Uttarakhand, Madhya Pradesh, and Maharashtra. Requires moderate climate, high altitude, and well-drained soil. Used extensively in Ayurvedic medicine, particularly for women's health."
+  },
+  {
+    "id": 95,
+    "crop": "Ashwagandha",
+    "region": "North & Central India",
+    "sowingPeriod": "August - September",
+    "harvestPeriod": "January - February",
+    "details": "Medicinal herb grown in Madhya Pradesh, Rajasthan, Gujarat, and Maharashtra. Madhya Pradesh's Mandsaur district is famous for ashwagandha cultivation. Requires dry climate, sandy soil, and moderate rainfall."
+  },
+  {
+    "id": 96,
+    "crop": "Stevia",
+    "region": "South & Northeast India",
+    "sowingPeriod": "Year-round (staggered planting)",
+    "harvestPeriod": "3-4 months after planting",
+    "details": "Natural sweetener crop grown in Maharashtra, Karnataka, Tamil Nadu, and Northeast states. Recently introduced commercial crop in India. Requires warm climate, well-drained soil, and regular irrigation."
+  },
+  {
+    "id": 97,
+    "crop": "Lemongrass",
+    "region": "South & Central India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "4-6 months after planting",
+    "details": "Aromatic herb grown in Kerala, Karnataka, Tamil Nadu, and Madhya Pradesh. Requires tropical or subtropical climate, well-distributed rainfall, and well-drained soil. Used for essential oil extraction."
+  },
+  {
+    "id": 98,
+    "crop": "Brahmi (Bacopa monnieri)",
+    "region": "South & East India",
+    "sowingPeriod": "June - July",
+    "harvestPeriod": "October - November",
+    "details": "Medicinal herb grown in Tamil Nadu, Kerala, West Bengal, and Bihar. Requires moist soil, high humidity, and tropical climate. Semi-aquatic plant used in Ayurvedic medicine for cognitive enhancement."
+  },
+  {
+    "id": 99,
+    "crop": "Dragon Fruit (Pitaya)",
+    "region": "West & South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "June - December",
+    "details": "Recently introduced exotic fruit crop grown in Maharashtra, Gujarat, Karnataka, and Tamil Nadu. Requires tropical or subtropical climate, well-drained soil, and support structures. Gujarat is becoming a major producer."
+  },
+  {
+    "id": 100,
+    "crop": "Avocado",
+    "region": "South India",
+    "sowingPeriod": "Perennial crop",
+    "harvestPeriod": "August - October",
+    "details": "Grown in limited areas of Tamil Nadu, Kerala, and Karnataka. Requires subtropical climate, well-drained soil, and protection from frost. Cultivation is expanding due to increasing domestic demand."
+  }
+]
+}
