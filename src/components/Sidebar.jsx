@@ -13,6 +13,7 @@ import {
 } from 'react-icons/bs';
 import { GiSprout } from "react-icons/gi";
 import { MdOutlineRecordVoiceOver } from "react-icons/md";
+import { Tractor} from 'lucide-react';
 
 
 function Sidebar() {
@@ -25,6 +26,7 @@ function Sidebar() {
     { path: '/weather-insights', icon: BsCloud, label: 'Weather Insights' },
     { path: '/crop-calendar', icon: BsCalendar, label: 'Crop Calendar' },
     { path: '/subsidy-checker', icon: BsCash, label: 'Subsidy Checker' },
+    { path: '/supply-chain', icon: Tractor,  label: 'Supply Chain Advisor' },
     { path: '/biomass-collection', icon: BsCash, label: 'Biomass Collection' },
     { path: '/ai-support', icon: BsChatDots, label: 'AI Support' },
     { path: '/voice-support', icon: MdOutlineRecordVoiceOver, label: 'Voice Support' },

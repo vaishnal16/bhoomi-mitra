@@ -14,6 +14,7 @@ import Landing from "./pages/Landing.jsx";
 import AuthPages from "./pages/AuthPages.jsx";
 import Voicechatbot from "./pages/Voicechatbot.jsx";
 import BiomassCollection from "./pages/BiomassCollection";
+import SupplyChain from "./pages/SupplyChainForm.jsx";
 
 export default function App() {
   return (
@@ -52,6 +53,7 @@ function ProtectedLayout() {
             <Route path="/weather-insights" element={<WeatherInsights />} />
             <Route path="/subsidy-checker" element={<SubsidyChecker />} />
             <Route path="/crop-calendar" element={<CropCalendar />} />
+            <Route path="/supply-chain" element={<SupplyChain />} />
             <Route path="/ai-support" element={<AISupport />} />
             <Route path="/voice-support" element={<Voicechatbot/>} />
             <Route path="/biomass-collection" element={<BiomassCollection />} />
