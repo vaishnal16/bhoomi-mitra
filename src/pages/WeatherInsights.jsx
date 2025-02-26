@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BsCloud, BsDroplet, BsWind, BsThermometer, BsSun, BsCloudRain, BsCloudSun, BsCalendar, BsExclamationTriangle } from 'react-icons/bs';
+import { BsCloud, BsDroplet, BsWind, BsThermometer, BsSun, BsCloudRain, BsCloudSun, BsCalendar, BsExclamationTriangle, BsCloudSnow, BsCloudFog } from 'react-icons/bs';
 
 function WeatherInsights() {
   const [weatherData, setWeatherData] = useState({
@@ -12,146 +12,282 @@ function WeatherInsights() {
     alerts: []
   });
 
-  // Add back the forecast state
-  const [forecast] = useState([
-    { date: 'Mon', temperature: 28, condition: 'Sunny', humidity: 65, windSpeed: 12, precipitation: 0, icon: BsCloudSun },
-    { date: 'Tue', temperature: 27, condition: 'Cloudy', humidity: 70, windSpeed: 10, precipitation: 20, icon: BsCloud },
-    { date: 'Wed', temperature: 25, condition: 'Rain', humidity: 80, windSpeed: 15, precipitation: 60, icon: BsCloudRain },
-    { date: 'Thu', temperature: 26, condition: 'Cloudy', humidity: 75, windSpeed: 11, precipitation: 30, icon: BsCloud },
-    { date: 'Fri', temperature: 29, condition: 'Sunny', humidity: 60, windSpeed: 8, precipitation: 0, icon: BsCloudSun }
-  ]);
-
-  // Add back the farming calendar state
-  const [farmingCalendar] = useState([
-    {
-      date: '2024-03-15',
-      activities: [
-        { type: 'Irrigation', time: 'Early Morning', priority: 'High' },
-        { type: 'Fertilization', time: 'Afternoon', priority: 'Medium' }
-      ]
-    },
-    {
-      date: '2024-03-16',
-      activities: [
-        { type: 'Pest Control', time: 'Morning', priority: 'High' },
-        { type: 'Harvesting', time: 'Late Afternoon', priority: 'Medium' }
-      ]
-    }
-  ]);
-
-  // Add back the crop recommendations state
-  const [cropRecommendations] = useState([
-    {
-      category: 'Irrigation',
-      recommendations: [
-        'Consider early morning irrigation to minimize water loss',
-        'Adjust irrigation schedule based on soil moisture levels',
-        'Monitor water requirements for different growth stages'
-      ]
-    },
-    {
-      category: 'Crop Protection',
-      recommendations: [
-        'Apply preventive fungicide before forecasted rain',
-        'Install temporary shade structures for sensitive crops',
-        'Ensure proper drainage to prevent waterlogging'
-      ]
-    },
-    {
-      category: 'Resource Management',
-      recommendations: [
-        'Optimize water usage during peak temperature hours',
-        'Plan harvesting activities around weather conditions',
-        'Prepare contingency measures for extreme weather'
-      ]
-    }
-  ]);
+  const [forecast, setForecast] = useState([]);
+  const [farmingCalendar, setFarmingCalendar] = useState([]);
+  const [cropRecommendations, setCropRecommendations] = useState([]);
 
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Parse weather data from Gemini response
+  // Helper function to get appropriate weather icon based on condition
+  const getWeatherIcon = (condition) => {
+    condition = condition ? condition.toLowerCase() : '';
+    if (condition.includes('rain')) return BsCloudRain;
+    if (condition.includes('snow')) return BsCloudSnow;
+    if (condition.includes('fog') || condition.includes('mist')) return BsCloudFog;
+    if (condition.includes('cloud') && condition.includes('sun')) return BsCloudSun;
+    if (condition.includes('cloud')) return BsCloud;
+    return BsSun; // Default to sunny
+  };
+
+  // Function to generate farming calendar based on weather
+  const generateFarmingCalendar = (weatherData) => {
+    const today = new Date();
+    const calendar = [];
+    
+    // Generate dates for the next 5 days
+    for (let i = 0; i < 5; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+      const dateString = date.toISOString().split('T')[0];
+      
+      // Generate activities based on weather conditions
+      const activities = [];
+      
+      // If temperature is high, suggest early morning activities
+      if (weatherData.temperature > 25) {
+        activities.push({ 
+          type: 'Irrigation', 
+          time: 'Early Morning', 
+          priority: 'High' 
+        });
+      }
+      
+      // If precipitation is low, suggest watering
+      if (weatherData.precipitation < 30) {
+        activities.push({ 
+          type: 'Watering', 
+          time: 'Evening', 
+          priority: weatherData.precipitation < 10 ? 'High' : 'Medium' 
+        });
+      }
+      
+      // If soil moisture is low, suggest irrigation
+      if (weatherData.soilMoisture < 40) {
+        if (!activities.some(a => a.type === 'Irrigation')) {
+          activities.push({ 
+            type: 'Irrigation', 
+            time: 'Morning', 
+            priority: 'High' 
+          });
+        }
+      }
+      
+      // If humidity is high, suggest pest control
+      if (weatherData.humidity > 70) {
+        activities.push({ 
+          type: 'Pest Control', 
+          time: 'Morning', 
+          priority: 'High' 
+        });
+      }
+      
+      // If it's the first day (today), add harvesting if conditions are good
+      if (i === 0 && weatherData.precipitation < 20 && weatherData.windSpeed < 15) {
+        activities.push({ 
+          type: 'Harvesting', 
+          time: 'Late Afternoon', 
+          priority: 'Medium' 
+        });
+      }
+      
+      // If it's the second day, add fertilization if no heavy rain
+      if (i === 1 && weatherData.precipitation < 40) {
+        activities.push({ 
+          type: 'Fertilization', 
+          time: 'Afternoon', 
+          priority: 'Medium' 
+        });
+      }
+      
+      // Ensure we have at least one activity per day
+      if (activities.length === 0) {
+        activities.push({ 
+          type: 'Field Monitoring', 
+          time: 'Morning', 
+          priority: 'Medium' 
+        });
+      }
+      
+      calendar.push({
+        date: dateString,
+        activities: activities
+      });
+    }
+    
+    return calendar;
+  };
+
+  // Function to generate crop recommendations based on weather
+  const generateCropRecommendations = (weatherData) => {
+    const recommendations = [];
+    
+    // Irrigation recommendations
+    const irrigationRecs = [];
+    if (weatherData.temperature > 25) {
+      irrigationRecs.push('Consider early morning irrigation to minimize water loss');
+    }
+    if (weatherData.soilMoisture < 50) {
+      irrigationRecs.push('Increase irrigation frequency to maintain optimal soil moisture');
+    } else if (weatherData.soilMoisture > 70) {
+      irrigationRecs.push('Reduce irrigation to prevent waterlogging');
+    }
+    irrigationRecs.push('Adjust irrigation based on current soil moisture readings of ' + weatherData.soilMoisture + '%');
+    
+    recommendations.push({
+      category: 'Irrigation',
+      recommendations: irrigationRecs
+    });
+    
+    // Crop Protection recommendations
+    const protectionRecs = [];
+    if (weatherData.precipitation > 40) {
+      protectionRecs.push('Apply preventive fungicide before forecasted rain');
+      protectionRecs.push('Ensure proper drainage to prevent waterlogging');
+    }
+    if (weatherData.temperature > 30) {
+      protectionRecs.push('Install temporary shade structures for sensitive crops');
+    }
+    if (weatherData.windSpeed > 15) {
+      protectionRecs.push('Consider wind breaks for vulnerable crops');
+    }
+    
+    recommendations.push({
+      category: 'Crop Protection',
+      recommendations: protectionRecs
+    });
+    
+    // Resource Management recommendations
+    const resourceRecs = [];
+    resourceRecs.push('Optimize water usage during peak temperature hours');
+    resourceRecs.push('Plan harvesting activities around weather conditions');
+    if (weatherData.precipitation > 50 || weatherData.windSpeed > 20) {
+      resourceRecs.push('Prepare contingency measures for extreme weather');
+    }
+    
+    recommendations.push({
+      category: 'Resource Management',
+      recommendations: resourceRecs
+    });
+    
+    return recommendations;
+  };
+
+  // Function to generate 5-day forecast based on current weather
+  const generateForecast = (currentWeather) => {
+    const forecastData = [];
+    const today = new Date();
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    
+    // Use current data as base and create variations for next 5 days
+    for (let i = 0; i < 5; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+      const dayName = daysOfWeek[date.getDay()];
+      
+      // Create some reasonable variations from current weather
+      const tempVariation = Math.floor(Math.random() * 5) - 2; // -2 to +2 degrees
+      const humidityVariation = Math.floor(Math.random() * 10) - 5; // -5 to +5 percent
+      const windVariation = Math.floor(Math.random() * 6) - 3; // -3 to +3 km/h
+      const precipVariation = Math.floor(Math.random() * 20) - 5; // -5 to +15 percent
+      
+      let condition = 'Sunny';
+      const precipForecast = Math.max(0, Math.min(100, currentWeather.precipitation + precipVariation));
+      if (precipForecast > 50) condition = 'Rain';
+      else if (precipForecast > 20) condition = 'Cloudy';
+      else if (precipForecast > 10) condition = 'Partly Cloudy';
+      else condition = 'Sunny';
+      
+      forecastData.push({
+        date: dayName,
+        temperature: Math.max(0, Math.min(50, currentWeather.temperature + tempVariation)),
+        condition: condition,
+        humidity: Math.max(0, Math.min(100, currentWeather.humidity + humidityVariation)),
+        windSpeed: Math.max(0, currentWeather.windSpeed + windVariation),
+        precipitation: precipForecast,
+        icon: getWeatherIcon(condition)
+      });
+    }
+    
+    return forecastData;
+  };
+
+  // Function to parse weather data from Gemini API response
   const parseGeminiResponse = (response) => {
     try {
-        // Debugging the raw response
-        console.log('Raw response:', response);
+      console.log('Raw response:', response);
+        
+      // Parse the JSON string to object if it's a string
+      const parsedResponse = typeof response === 'string' 
+          ? JSON.parse(response) 
+          : response;
+        
+      // Extract forecast data from the parsed response
+      const forecast = parsedResponse.forecast || {};
 
-        // Extract temperature (handles single value and range)
-        const tempMatch = response.match(/Temperature:.*?(\d+)(?:-(\d+))?°C/);
-        const avgTemp = tempMatch ? Math.round(tempMatch[2] ? (parseInt(tempMatch[1]) + parseInt(tempMatch[2])) / 2 : parseInt(tempMatch[1])) : null;
+      // Extract relevant weather details from response
+      const {
+          temperature,
+          humidity,
+          windSpeed,
+          uvIndex,
+          soilMoisture,
+          precipitation
+      } = forecast;
 
-        // Extract humidity (handles single value and range)
-        const humidityMatch = response.match(/Humidity:.*?(\d+)(?:-(\d+))?%/);
-        const avgHumidity = humidityMatch ? Math.round(humidityMatch[2] ? (parseInt(humidityMatch[1]) + parseInt(humidityMatch[2])) / 2 : parseInt(humidityMatch[1])) : null;
+      // Convert extracted values to appropriate types
+      const avgTemp = temperature ? parseInt(temperature.replace('°C', '')) : null;
+      const avgHumidity = humidity ? parseInt(humidity.replace('%', '')) : null;
+      const avgWind = windSpeed ? parseInt(windSpeed.replace(' km/h', '')) : null;
+      const avgPrecipitation = precipitation ? parseInt(precipitation.replace('%', '')) : null;
+      const avgUVIndex = uvIndex ? parseInt(uvIndex) : 6; // Default UV index
+      const avgSoilMoisture = soilMoisture ? parseInt(soilMoisture.replace('%', '')) : 45; // Default soil moisture
 
-        // Extract wind speed (handles single value and range)
-        const windMatch = response.match(/Wind:.*?(\d+)(?:-(\d+))?\s*km\/h/);
-        const avgWind = windMatch ? Math.round(windMatch[2] ? (parseInt(windMatch[1]) + parseInt(windMatch[2])) / 2 : parseInt(windMatch[1])) : null;
+      // Alerts based on extracted data
+      const alerts = [];
+      if (avgTemp !== null && avgTemp > 30) {
+          alerts.push({
+              type: 'High Temperature',
+              message: 'Protect your crops from heat stress.',
+              severity: 'warning'
+          });
+      }
+      if (avgPrecipitation !== null && avgPrecipitation > 10) {
+          alerts.push({
+              type: 'Heavy Rainfall',
+              message: 'Heavy rainfall expected, ensure proper drainage.',
+              severity: 'alert'
+          });
+      }
 
-        // Extract rainfall (handles single value and range)
-        const rainMatch = response.match(/Rainfall:.*?(\d+)(?:-(\d+))?\s*mm/);
-        const avgRainfall = rainMatch ? Math.round(rainMatch[2] ? (parseInt(rainMatch[1]) + parseInt(rainMatch[2])) / 2 : parseInt(rainMatch[1])) : null;
+      const parsedWeatherData = {
+          temperature: avgTemp,
+          humidity: avgHumidity,
+          windSpeed: avgWind,
+          precipitation: avgPrecipitation,
+          uvIndex: avgUVIndex,
+          soilMoisture: avgSoilMoisture,
+          alerts
+      };
 
-        // Extract UV Index (if present)
-        const uvMatch = response.match(/UV Index:.*?(\d+)/);
-        const uvIndex = uvMatch ? parseInt(uvMatch[1]) : 6; // Default value
-
-        // Extract Soil Moisture (if present)
-        const soilMatch = response.match(/Soil Moisture:.*?(\d+)%/);
-        const soilMoisture = soilMatch ? parseInt(soilMatch[1]) : 45; // Default value
-
-        // Alerts based on extracted data
-        const alerts = [];
-        if (avgTemp !== null && avgTemp > 30) {
-            alerts.push({
-                type: 'High Temperature',
-                message: 'Protect your crops from heat stress',
-                severity: 'warning'
-            });
-        }
-        if (avgRainfall !== null && avgRainfall > 10) {
-            alerts.push({
-                type: 'Heavy Rainfall',
-                message: 'Heavy rainfall expected, ensure proper drainage',
-                severity: 'alert'
-            });
-        }
-
-        // Log parsed values for debugging
-        console.log('Parsed values:', {
-            temperature: avgTemp,
-            humidity: avgHumidity,
-            windSpeed: avgWind,
-            precipitation: avgRainfall,
-            uvIndex,
-            soilMoisture
-        });
-
-        return {
-            temperature: avgTemp,
-            humidity: avgHumidity,
-            windSpeed: avgWind,
-            precipitation: avgRainfall,
-            uvIndex,
-            soilMoisture,
-            alerts
-        };
+      console.log('Parsed values:', parsedWeatherData);
+      return parsedWeatherData;
     } catch (error) {
-        console.error('Error parsing Gemini response:', error);
-        return {
-            temperature: null,
-            humidity: null,
-            windSpeed: null,
-            precipitation: null,
-            uvIndex: 6,
-            soilMoisture: 45,
-            alerts: []
-        };
+      console.error('Error parsing Gemini response:', error);
+      return {
+          temperature: null,
+          humidity: null,
+          windSpeed: null,
+          precipitation: null,
+          uvIndex: 6,
+          soilMoisture: 45,
+          alerts: []
+      };
     }
-};
+  };
 
-// Get user's location
+  // Get user's location
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -199,7 +335,7 @@ function WeatherInsights() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      const data = await response.text();
+      const data = await response.json();
       console.log('Raw API response:', data);
   
       const parsedWeatherData = parseGeminiResponse(data);
@@ -207,6 +343,17 @@ function WeatherInsights() {
       
       if (parsedWeatherData) {
         setWeatherData(parsedWeatherData);
+        
+        // Generate dynamic data based on current weather
+        const dynamicForecast = generateForecast(parsedWeatherData);
+        setForecast(dynamicForecast);
+        
+        const dynamicCalendar = generateFarmingCalendar(parsedWeatherData);
+        setFarmingCalendar(dynamicCalendar);
+        
+        const dynamicRecommendations = generateCropRecommendations(parsedWeatherData);
+        setCropRecommendations(dynamicRecommendations);
+        
         setError(null);
       } else {
         setError('Error parsing weather data');
@@ -304,7 +451,7 @@ function WeatherInsights() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Temperature</p>
-              <p className="text-xl font-bold text-blue-600">{weatherData.temperature}°C</p>
+              <p className="text-xl font-bold text-blue-600">{weatherData.temperature !== null ? `${weatherData.temperature}°C` : 'N/A'}</p>
             </div>
           </div>
           <div className="flex items-center p-4 bg-green-50 rounded-lg">
@@ -313,7 +460,7 @@ function WeatherInsights() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Humidity</p>
-              <p className="text-xl font-bold text-green-600">{weatherData.humidity}%</p>
+              <p className="text-xl font-bold text-green-600">{weatherData.humidity !== null ? `${weatherData.humidity}%` : 'N/A'}</p>
             </div>
           </div>
           <div className="flex items-center p-4 bg-purple-50 rounded-lg">
@@ -322,7 +469,7 @@ function WeatherInsights() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Wind Speed</p>
-              <p className="text-xl font-bold text-purple-600">{weatherData.windSpeed} km/h</p>
+              <p className="text-xl font-bold text-purple-600">{weatherData.windSpeed !== null ? `${weatherData.windSpeed} km/h` : 'N/A'}</p>
             </div>
           </div>
           <div className="flex items-center p-4 bg-yellow-50 rounded-lg">
@@ -331,7 +478,7 @@ function WeatherInsights() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">UV Index</p>
-              <p className="text-xl font-bold text-yellow-600">{weatherData.uvIndex}</p>
+              <p className="text-xl font-bold text-yellow-600">{weatherData.uvIndex !== null ? weatherData.uvIndex : 'N/A'}</p>
             </div>
           </div>
           <div className="flex items-center p-4 bg-teal-50 rounded-lg">
@@ -340,7 +487,7 @@ function WeatherInsights() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Soil Moisture</p>
-              <p className="text-xl font-bold text-teal-600">{weatherData.soilMoisture}%</p>
+              <p className="text-xl font-bold text-teal-600">{weatherData.soilMoisture !== null ? `${weatherData.soilMoisture}%` : 'N/A'}</p>
             </div>
           </div>
           <div className="flex items-center p-4 bg-indigo-50 rounded-lg">
@@ -349,7 +496,7 @@ function WeatherInsights() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Precipitation</p>
-              <p className="text-xl font-bold text-indigo-600">{weatherData.precipitation}%</p>
+              <p className="text-xl font-bold text-indigo-600">{weatherData.precipitation !== null ? `${weatherData.precipitation}%` : 'N/A'}</p>
             </div>
           </div>
         </div>
@@ -381,7 +528,7 @@ function WeatherInsights() {
         <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Farming Calendar</h3>
           <div className="space-y-4">
-            {farmingCalendar.map((day, dayIndex) => (
+            {farmingCalendar.slice(0, 2).map((day, dayIndex) => (
               <div key={dayIndex} className="border-b border-gray-200 pb-4 last:border-0">
                 <div className="flex items-center mb-2">
                   <BsCalendar className="h-5 w-5 text-primary-600 mr-2" />
