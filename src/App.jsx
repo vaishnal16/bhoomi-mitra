@@ -13,6 +13,7 @@ import AISupport from "./pages/AISupport.jsx";
 import Landing from "./pages/Landing.jsx";
 import AuthPages from "./pages/AuthPages.jsx";
 import Voicechatbot from "./pages/Voicechatbot.jsx";
+import BiomassCollection from "./pages/BiomassCollection";
 
 export default function App() {
   return (
@@ -53,6 +54,7 @@ function ProtectedLayout() {
             <Route path="/crop-calendar" element={<CropCalendar />} />
             <Route path="/ai-support" element={<AISupport />} />
             <Route path="/voice-support" element={<Voicechatbot/>} />
+            <Route path="/biomass-collection" element={<BiomassCollection />} />
           </Routes>
         </main>
       </div>
