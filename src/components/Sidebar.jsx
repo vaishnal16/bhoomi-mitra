@@ -11,7 +11,7 @@ import {
   BsFlower1,
   BsCalendar
 } from 'react-icons/bs';
-import { GiSprout } from "react-icons/gi";
+import { GiLeadPipe, GiSprout } from "react-icons/gi";
 import { MdOutlineRecordVoiceOver } from "react-icons/md";
 import { Tractor} from 'lucide-react';
 import { IoFlaskOutline } from "react-icons/io5";
@@ -29,6 +29,7 @@ function Sidebar() {
     { path: '/subsidy-checker', icon: BsCash, label: 'Subsidy Checker' },
     { path: '/supply-chain', icon: Tractor,  label: 'Supply Chain Advisor' },
     { path: '/biomass-collection', icon: IoFlaskOutline, label: 'Biomass Collection' },
+    { path: '/organic-advisor', icon: GiSprout, label:'Organic Advisor'},
     { path: '/ai-support', icon: BsChatDots, label: 'AI Support' },
     { path: '/voice-support', icon: MdOutlineRecordVoiceOver, label: 'Voice Support' },
   ];
