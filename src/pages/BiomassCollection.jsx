@@ -24,7 +24,7 @@ function BiomassCollection() {
     species: '',
     location: '',
     wood: '',
-    bark: 'High',
+    quality: 'High',
     date: new Date().toISOString().split('T')[0],
     status: 'Available'
   });
@@ -66,7 +66,7 @@ function BiomassCollection() {
         species: item.type,
         dbh: Math.round(parseFloat(item.wood) * 2), // Simulate diameter breast height based on wood mass
         wood: parseFloat(item.wood),
-        bark: item.quality === 'High' ? parseFloat(item.wood) * 0.2 : 
+        quality: item.quality === 'High' ? parseFloat(item.wood) * 0.2 : 
               item.quality === 'Medium' ? parseFloat(item.wood) * 0.15 : 
               parseFloat(item.wood) * 0.1,
         root: parseFloat(item.wood) * 0.3,
@@ -176,7 +176,7 @@ function BiomassCollection() {
         quantity: entry.wood ? `${entry.wood} tons` : "N/A",
         wood: entry.wood || 0, // Keep the raw number for filtering
         date: entry.date || new Date().toISOString().split("T")[0],
-        quality: entry.bark || "High",
+        quality: entry.quality || "High",
         energyPotential: entry.wood 
           ? `${(parseFloat(entry.wood) * 1.5).toFixed(1)} MWh` 
           : "N/A",
@@ -212,29 +212,30 @@ function BiomassCollection() {
     }
   };
 
-  const createCollection = async (collectionData) => {
-    try {
-      const response = await fetch(`${API_URL}/external`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(collectionData),
-      });
-      
-      if (!response.ok) {
-        const errorText = await response.text().catch(() => 'No error details');
-        console.error(`Server responded with ${response.status}: ${errorText}`);
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error("Error creating collection:", error);
-      throw error;
+  // API function to create a new collection
+const createCollection = async (collectionData) => {
+  try {
+    const response = await fetch(`${API_URL}/external`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(collectionData),
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => 'No error details');
+      console.error(`Server responded with ${response.status}: ${errorText}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  };
+    
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error creating collection:", error);
+    throw error;
+  }
+};
 
   // Initialize Socket.IO connection and fetch data
   useEffect(() => {
@@ -395,35 +396,52 @@ function BiomassCollection() {
         species: newCollection.species,
         location: newCollection.location,
         wood: parseFloat(newCollection.wood),
-        bark: newCollection.bark,
+        quality: newCollection.quality,
         date: newCollection.date,
         status: 'Available'
       };
       
+      let newItem;
+      
       try {
         // Try to create through API first
-        await createCollection(collectionData);
-        console.log("Collection created successfully via API");
-      } catch (apiError) {
-        console.warn("API creation failed, adding collection locally", apiError);
+        const response = await createCollection(collectionData);
+        console.log("Collection created successfully via API", response);
         
-        // If API fails, add the item locally to the collections array
-        const newItem = {
-          id: collections.length + 1,
+        // Use the response from API if available
+        newItem = {
+          id: response.id || Date.now(),
           type: collectionData.species,
           location: collectionData.location,
           quantity: `${collectionData.wood} tons`,
           wood: collectionData.wood,
           date: collectionData.date,
-          quality: collectionData.bark,
+          quality: collectionData.quality,
           energyPotential: `${calculateEnergyPotential(collectionData.wood)} MWh`,
           energyValue: parseFloat(collectionData.wood) * 1.5,
           status: collectionData.status
         };
         
-        // Update the collections state directly
-        setCollections(prevCollections => [...prevCollections, newItem]);
+      } catch (apiError) {
+        console.warn("API creation failed, adding collection locally", apiError);
+        
+        // If API fails, add the item locally to the collections array
+        newItem = {
+          id: Date.now(), // Use timestamp for more reliable unique IDs
+          type: collectionData.species,
+          location: collectionData.location,
+          quantity: `${collectionData.wood} tons`,
+          wood: collectionData.wood,
+          date: collectionData.date,
+          quality: collectionData.quality,
+          energyPotential: `${calculateEnergyPotential(collectionData.wood)} MWh`,
+          energyValue: parseFloat(collectionData.wood) * 1.5,
+          status: collectionData.status
+        };
       }
+      
+      // Update the collections state by adding new item at the beginning
+      setCollections(prevCollections => [newItem, ...prevCollections]);
       
       // Reset form regardless of API success
       setShowModal(false);
@@ -431,7 +449,7 @@ function BiomassCollection() {
         species: '',
         location: '',
         wood: '',
-        bark: 'High',
+        quality: 'High',
         date: new Date().toISOString().split('T')[0],
         status: 'Available'
       });
@@ -751,106 +769,106 @@ function BiomassCollection() {
 
       {/* Add Collection Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-semibold mb-4">Schedule New Collection</h3>
-            <form onSubmit={handleCreateCollection} className="space-y-3">
-              {/* Biomass Type Dropdown */}
-              <select
-                name="species"
-                value={newCollection.species}
-                onChange={handleInputChange}
-                required
-                className="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">Select Biomass Type</option>
-                <option value="Crop Residue">Crop Residue</option>
-                <option value="Wood Waste">Wood Waste</option>
-                <option value="Agricultural Waste">Agricultural Waste</option>
-                <option value="Forest Residue">Forest Residue</option>
-                <option value="Sawdust">Sawdust</option>
-                <option value="Pine">Pine</option>
-                <option value="Oak">Oak</option>
-                <option value="Maple">Maple</option>
-              </select>
+  <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+      <h3 className="text-xl font-semibold mb-4">Schedule New Collection</h3>
+      <form onSubmit={handleCreateCollection} className="space-y-3">
+        {/* Biomass Type Dropdown */}
+        <select
+          name="species"
+          value={newCollection.species}
+          onChange={handleInputChange}
+          required
+          className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">Select Biomass Type</option>
+          <option value="Crop Residue">Crop Residue</option>
+          <option value="Wood Waste">Wood Waste</option>
+          <option value="Agricultural Waste">Agricultural Waste</option>
+          <option value="Forest Residue">Forest Residue</option>
+          <option value="Sawdust">Sawdust</option>
+          <option value="Pine">Pine</option>
+          <option value="Oak">Oak</option>
+          <option value="Maple">Maple</option>
+        </select>
 
-              {/* Location Input */}
-              <input
-                type="text"
-                name="location"
-                placeholder="Location"
-                value={newCollection.location}
-                onChange={handleInputChange}
-                required
-                className="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+        {/* Location Input */}
+        <input
+          type="text"
+          name="location"
+          placeholder="Location"
+          value={newCollection.location}
+          onChange={handleInputChange}
+          required
+          className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
-              {/* Quantity Input */}
-              <input
-                type="number"
-                name="wood"
-                placeholder="Quantity (in tons)"
-                value={newCollection.wood}
-                onChange={handleInputChange}
-                required
-                min="0"
-                step="0.1"
-                className="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+        {/* Quantity Input */}
+        <input
+          type="number"
+          name="wood"
+          placeholder="Quantity (in tons)"
+          value={newCollection.wood}
+          onChange={handleInputChange}
+          required
+          min="0"
+          step="0.1"
+          className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
-              {/* Date Picker */}
-              <input
-                type="date"
-                name="date"
-                value={newCollection.date}
-                onChange={handleInputChange}
-                required
-                className="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+        {/* Date Picker */}
+        <input
+          type="date"
+          name="date"
+          value={newCollection.date}
+          onChange={handleInputChange}
+          required
+          className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
-              {/* Energy Level Selection */}
-              <select
-                name="bark"
-                value={newCollection.bark}
-                onChange={handleInputChange}
-                required
-                className="w-full border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </select>
+        {/* Energy Level Selection */}
+        <select
+          name="quality"
+          value={newCollection.quality}
+          onChange={handleInputChange}
+          required
+          className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
 
-              {/* Energy Potential (Read-Only) */}
-              <input
-                type="text"
-                placeholder="Energy Potential (MWh)"
-                value={`${calculateEnergyPotential(newCollection.wood)} MWh`}
-                readOnly
-                disabled
-                className="w-full border-gray-300 rounded-md p-2 bg-gray-100 cursor-not-allowed"
-              />
+        {/* Energy Potential (Read-Only) */}
+        <input
+          type="text"
+          placeholder="Energy Potential (MWh)"
+          value={`${calculateEnergyPotential(newCollection.wood)} MWh`}
+          readOnly
+          disabled
+          className="w-full border border-gray-300 rounded-md p-2 bg-gray-100 cursor-not-allowed"
+        />
 
-              {/* Buttons */}
-              <div className="flex justify-between mt-4">
-                <button
-                  type="button"
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition"
-                  onClick={() => setShowModal(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition"
-                >
-                  Create Collection
-                </button>
-              </div>
-            </form>
-          </div>
+        {/* Buttons */}
+        <div className="flex justify-between mt-4">
+          <button
+            type="button"
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition"
+            onClick={() => setShowModal(false)}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition"
+          >
+            Create Collection
+          </button>
         </div>
-      )}
+      </form>
+    </div>
+  </div>
+)}
     </div>
   );
 }

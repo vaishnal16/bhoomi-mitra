@@ -6,7 +6,7 @@ let model;
 export const initializeGemini = (apiKey) => {
   genAI = new GoogleGenerativeAI(apiKey);
   model = genAI.getGenerativeModel({ 
-    model: "gemini-pro",
+    model: "gemini-2.0-flash",
     generationConfig: {
       maxOutputTokens: 8192,
       temperature: 0.7,
