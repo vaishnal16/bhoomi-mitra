@@ -141,22 +141,22 @@ function WeatherInsights() {
     });
     
     // Crop Protection recommendations
-    const protectionRecs = [];
-    if (weatherData.precipitation > 40) {
-      protectionRecs.push('Apply preventive fungicide before forecasted rain');
-      protectionRecs.push('Ensure proper drainage to prevent waterlogging');
-    }
-    if (weatherData.temperature > 30) {
-      protectionRecs.push('Install temporary shade structures for sensitive crops');
-    }
-    if (weatherData.windSpeed > 15) {
-      protectionRecs.push('Consider wind breaks for vulnerable crops');
-    }
+    // const protectionRecs = [];
+    // if (weatherData.precipitation > 40) {
+    //   protectionRecs.push('Apply preventive fungicide before forecasted rain');
+    //   protectionRecs.push('Ensure proper drainage to prevent waterlogging');
+    // }
+    // if (weatherData.temperature > 30) {
+    //   protectionRecs.push('Install temporary shade structures for sensitive crops');
+    // }
+    // if (weatherData.windSpeed > 15) {
+    //   protectionRecs.push('Consider wind breaks for vulnerable crops');
+    // }
     
-    recommendations.push({
-      category: 'Crop Protection',
-      recommendations: protectionRecs
-    });
+    // recommendations.push({
+    //   category: 'Crop Protection',
+    //   recommendations: protectionRecs
+    // });
     
     // Resource Management recommendations
     const resourceRecs = [];
