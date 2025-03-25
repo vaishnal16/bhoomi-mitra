@@ -53,6 +53,10 @@ setInterval(async () => {
   }
 }, 30000);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to Bhoomi Mitra Backend!");
+});
+
 app.use("/api", authRoutes);
 app.use("/api/weather", weatherRoutes);
 app.use("/api/biomass", biomassRoutes);
