@@ -29,7 +29,7 @@ function Sidebar() {
     { path: '/subsidy-checker', icon: BsCash, label: 'Subsidy Checker' },
     { path: '/supply-chain', icon: Tractor,  label: 'Supply Chain Advisor' },
     { path: '/organic-advisor', icon: GiSprout, label:'Organic Advisor'},
-    { path: '/biomass-collection', icon: IoFlaskOutline, label: 'Biomass Collection' },
+    // { path: '/biomass-collection', icon: IoFlaskOutline, label: 'Biomass Collection' },
     { path: '/ai-support', icon: BsChatDots, label: 'AI Support' },
     { path: '/voice-support', icon: MdOutlineRecordVoiceOver, label: 'Voice Support' },
   ];

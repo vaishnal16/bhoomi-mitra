@@ -1,45 +1,37 @@
-const languageMappings = {
-    en: {
-      speech: 'en-IN',
-      bcp47: 'en-IN',
-      geminiName: 'English'
-    },
-    hi: {
-      speech: 'hi-IN',
-      bcp47: 'hi-IN',
-      geminiName: 'हिंदी'
-    },
-    mr: {
-      speech: 'mr-IN',
-      bcp47: 'mr-IN',
-      geminiName: 'मराठी'
-    },
-    pa: {
-      speech: 'pa-IN',
-      bcp47: 'pa-IN',
-      geminiName: 'ਪੰਜਾਬੀ'
-    },
-    bn: {
-      speech: 'bn-IN',
-      bcp47: 'bn-IN',
-      geminiName: 'বাংলা'
-    },
-    te: {
-      speech: 'te-IN',
-      bcp47: 'te-IN',
-      geminiName: 'తెలుగు'
-    },
-    kn: {
-      speech: 'kn-IN',
-      bcp47: 'kn-IN',
-      geminiName: 'ಕನ್ನಡ'
-    }
+export const getLanguageCode = (code) => {
+  const languageMap = {
+    'en': 'en-US',
+    'hi': 'hi-IN',
+    'mr': 'mr-IN',
+    'pa': 'pa-IN',
+    'bn': 'bn-IN',
+    'te': 'te-IN',
+    'kn': 'kn-IN',
   };
   
-  export const getLanguageCode = (language) => {
-    return languageMappings[language]?.speech || 'en-IN';
-  };
+  return languageMap[code] || code;
+};
+
+// Get voice names for different languages
+export const getVoiceNames = () => {
+  const voices = window.speechSynthesis.getVoices();
   
-  export const getGeminiLanguageName = (language) => {
-    return languageMappings[language]?.geminiName || 'English';
-  };
+  const languageCodes = ['en', 'hi', 'mr', 'pa', 'bn', 'te', 'kn'];
+  const voiceMap = {};
+  
+  languageCodes.forEach(code => {
+    const fullCode = getLanguageCode(code);
+    const matchingVoices = voices.filter(voice => 
+      voice.lang.startsWith(fullCode) || 
+      voice.lang.startsWith(code)
+    );
+    
+    voiceMap[code] = matchingVoices.map(v => ({
+      name: v.name,
+      lang: v.lang,
+      default: v.default
+    }));
+  });
+  
+  return voiceMap;
+};

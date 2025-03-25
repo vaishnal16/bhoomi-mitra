@@ -7,7 +7,7 @@ import { initializeGemini, generateResponse } from '../services/gemini';
 import { speechToText, textToSpeech } from '../services/speech';
 import { getLanguageCode } from '../utils/languageMapping';
 
-const GEMINI_API_KEY = 'AIzaSyDSynDh4asJf6mcqtiEy2A5SG4UdX8wEIE';
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_VOICE_CHATBOT_API_KEY;
 
 function Voicechatbot() {
   const [messages, setMessages] = useState([]);
@@ -17,10 +17,43 @@ function Voicechatbot() {
     name: 'English',
     localName: 'English',
   });
+  const [voices, setVoices] = useState([]);
 
   useEffect(() => {
     initializeGemini(GEMINI_API_KEY);
+    
+    // Initialize voices for speech synthesis
+    if ('speechSynthesis' in window) {
+      // Get voices on load
+      const loadVoices = () => {
+        const availableVoices = window.speechSynthesis.getVoices();
+        setVoices(availableVoices);
+        console.log('Available voices:', availableVoices.map(v => `${v.name} (${v.lang})`));
+      };
+      
+      // Chrome loads voices asynchronously
+      if (window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = loadVoices;
+      }
+      
+      loadVoices();
+    }
   }, []);
+
+  // Handle language change
+  useEffect(() => {
+    if (voices.length > 0) {
+      console.log(`Selected language changed to: ${selectedLanguage.code}`);
+      // Log available voices for this language
+      const languageVoices = voices.filter(v => 
+        v.lang.startsWith(selectedLanguage.code) || 
+        v.lang.startsWith(selectedLanguage.code.split('-')[0])
+      );
+      console.log(`Available voices for ${selectedLanguage.code}:`, 
+        languageVoices.map(v => `${v.name} (${v.lang})`)
+      );
+    }
+  }, [selectedLanguage, voices]);
 
   const handleRecordingComplete = useCallback(async () => {
     setIsProcessing(true);
@@ -51,9 +84,12 @@ function Voicechatbot() {
       };
       setMessages((prev) => [...prev, assistantMessage]);
 
-      textToSpeech(response, languageCode).catch(error => {
-        console.error('Text-to-speech error:', error);
-      });
+      // Use the updated text-to-speech function with proper language code
+      await textToSpeech(response, languageCode)
+        .catch(error => {
+          console.error('Text-to-speech error:', error);
+          // If there's an error with TTS, we still want to show the text response
+        });
 
     } catch (error) {
       console.error('Error processing voice message:', error);

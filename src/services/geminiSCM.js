@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-const genAI = new GoogleGenerativeAI('AIzaSyAmE7vsGEE5hYboeeDUf3kRygylO5lTD-M');
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_SCM_API_KEY);
 
 export const generateSupplyChainPlan = async (
   options,
