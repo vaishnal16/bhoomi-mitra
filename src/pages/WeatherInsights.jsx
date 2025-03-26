@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BsCloud, BsDroplet, BsWind, BsThermometer, BsSun, BsCloudRain, BsCloudSun, BsCalendar, BsExclamationTriangle, BsCloudSnow, BsCloudFog } from 'react-icons/bs';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function WeatherInsights() {
   const [weatherData, setWeatherData] = useState({
@@ -301,7 +302,7 @@ function WeatherInsights() {
       setLoading(true);
       console.log('Fetching weather data for:', location);
   
-      const response = await fetch('http://localhost:5000/api/weather', {
+      const response = await fetch(`${API_BASE_URL}/api/weather`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, Shield, AlertCircle } from 'lucide-react';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const AuthPages = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -52,8 +53,8 @@ const AuthPages = () => {
     setError('');
     
     const endpoint = isLogin 
-      ? 'http://localhost:5000/api/login'
-      : 'http://localhost:5000/api/signup';
+      ? `${API_BASE_URL}/api/login`
+      : `${API_BASE_URL}/api/signup`;
     
     try {
       const response = await fetch(endpoint, {
