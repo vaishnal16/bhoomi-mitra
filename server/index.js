@@ -15,7 +15,7 @@ connectDatabase();
 
 const allowedOrigins = [
   "http://localhost:5173",  // Local development
-  `${FRONTEND_URL}` // Deployed frontend
+  "https://bhoomi-mitra.onrender.com"  // Deployed frontend
 ];
 
 const corsOptions = {
