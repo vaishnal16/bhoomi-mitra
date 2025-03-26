@@ -13,8 +13,13 @@ CONST FRONTEND_URL=import.meta.env.VITE_API_FRONTBASE_URL;
 const app = express();
 connectDatabase();
 
+const allowedOrigins = [
+  "http://localhost:5173",  // Local development
+  `${FRONTEND_URL}` // Deployed frontend
+];
+
 const corsOptions = {
-  origin: `${FRONTEND_URL}`,
+  origin: allowedOrigins,
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE"],
