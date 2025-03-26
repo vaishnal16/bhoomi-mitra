@@ -10,13 +10,13 @@ const http = require("http");
 const OptimizationMetric = require("./models/OptimizationMetric");
 
 // ✅ Fix: Use process.env instead of import.meta.env
-const FRONTEND_URL = process.env.VITE_API_FRONTEND_URL;  
+const FRONTEND_URL = process.env.FRONTEND_URL||"https://bhoomi-mitra.onrender.com";  
 
 const app = express();
 connectDatabase();
 
 const corsOptions = {
-  origin: FRONTEND_URL, // ✅ Fix: Use the correct environment variable
+  origin: FRONTEND_URL, 
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE"],
