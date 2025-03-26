@@ -8,12 +8,13 @@ const biomassRoutes = require("./routes/biomassRoutes");
 const { Server } = require('socket.io');
 const http = require('http');
 const OptimizationMetric = require('./models/OptimizationMetric');
+CONST FRONTEND_URL=import.meta.env.VITE_API_FRONTBASE_URL;
 
 const app = express();
 connectDatabase();
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: `${FRONTEND_URL}`,
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE"],
